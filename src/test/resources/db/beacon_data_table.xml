@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <beacon_data_table dataset_id="EGAD00000000001" chromosome="X" position="1" allele="A" />
+    <beacon_data_table dataset_id="EGAD00000000001" chromosome="1" position="2" allele="G" />
+    <beacon_data_table dataset_id="EGAD00000000001" chromosome="2" position="3" allele="C" />
+    <beacon_data_table dataset_id="EGAD00000000002" chromosome="12" position="1" allele="T" />
+    <beacon_data_table dataset_id="EGAD00000000002" chromosome="22" position="2" allele="A" />
+    <beacon_data_table dataset_id="EGAD00000000003" chromosome="7" position="1" allele="T" />
+    <beacon_data_table dataset_id="EGAD00000000003" chromosome="Y" position="1" allele="C" />
+    <beacon_data_table dataset_id="EGAD00000000004" chromosome="7" position="123" allele="G" />
+    <beacon_data_table dataset_id="EGAD00000000005" chromosome="20" position="7" allele="C" />
+</dataset>
