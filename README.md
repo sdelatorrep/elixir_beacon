@@ -142,8 +142,7 @@ You've got two options:
     * You can write your own implementation for the interface org.ega_archive.elixirbeacon.ElixirBeaconService
     * This application uses Spring framework. If you are not familiar with it you can find information [here](http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/htmlsingle/). Specifically we use Spring boot, you can find information about Spring boot [here](https://docs.spring.io/spring-boot/docs/1.1.x/reference/htmlsingle/).
     * The following steps will allow you to make a custom implementation:
-    
-        1. Create a new maven project: 
+        1. Create a new maven project:
         ```xml
         <?xml version="1.0" encoding="UTF-8"?>
         <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -249,6 +248,7 @@ They're defined in the org.ega_archive.elixirbeacon.ElixirBeaconController class
 
 ##/info
 Returns the information about this beacon: its Id, name and description, the API version it is compliant with, the URL where you can access this beacon, etc.
+
 https://egatest.crg.eu/elixir_demo_beacon/info
 ```json
 {
@@ -367,6 +367,7 @@ The 3 examples that appear in field sampleAlleleRequests can be customized by mo
 
 ##/query
 To actually ask the beacon for questions like "do you have any genomes with an 'A' at position 100,735 on chromosome 3?" And the answer will be yes or no.
+
 https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37)
 ```json
 {
@@ -385,6 +386,7 @@ https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=1798329
 }
 ```
 Or you can ask for the same information in an specific dataset:
+
 https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37&datasetIds=EGAD00001000740
 ```json
 {
