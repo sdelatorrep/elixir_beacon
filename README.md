@@ -72,12 +72,11 @@ The key file is: /src/main/resources/application-{profile}.properties (see below
 
 By default, the application is deployed at port 9075 and the context is elixirbeacon/v03/. You can change this by modifying the following lines of the properties file:
 ```INI
-application-dev.properties
 server.port=9075
 server.servlet-path=/v03
 server.context-path=/elixirbeacon
 ```
-By default, the application uses two PostgreSQL databases with the name elixir_beacon_dev and elixir_beacon_testing (the latter is used to run the tests).
+By default, the application uses two PostgreSQL databases with the name *elixir_beacon_dev* and *elixir_beacon_testing* (the latter is used to run the tests).
 ```INI
 datasource.elixirbeacon.url=jdbc:postgresql://hostname:port/elixir_beacon_dev
 datasource.elixirbeacon.username=the_username
@@ -100,7 +99,9 @@ spring.jpa.properties.hibernate.connection.charSet = UTF-8
  
 
 Do the same changes in /src/test/resources/application-{profile}.properties. By default, the database there is called elixir_beacon_testing.
+
 If you use a different DB than Postgres, you must add the corresponding library to the /lib folder inside the JAR or add the dependency to the pom.xml so maven can download the library (this will allow you to compile the code if you haven't done this yet).
+
 You can also change the sample requests that appear in the /info endpoint (see below Using the application) by modifying the values in application-{profile}.yml file:
 ```yml
 #sample #1
