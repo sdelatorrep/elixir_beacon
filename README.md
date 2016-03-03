@@ -140,9 +140,9 @@ You've got two options:
 2. Changing the implementation class.
     * If you want to change the way something is done (i. e. you want to modify the query, to check some requirements in the parameters, etc.)
     * You can write your own implementation for the interface org.ega_archive.elixirbeacon.ElixirBeaconService
-    * This application uses Spring framework. If you are not familiar with it you can find information [here](http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/htmlsingle/). Specifically we use Spring boot, you can find information about Spring boot [here](https://docs.spring.io/spring-boot/docs/1.1.x/reference/htmlsingle/).
+    * This application uses [Spring framework](http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/htmlsingle/). Specifically we use [Spring boot](https://docs.spring.io/spring-boot/docs/1.1.x/reference/htmlsingle/).
     * The following steps will allow you to make a custom implementation:
-        1. Create a new maven project:
+        * Create a new maven project:
         ```xml
         <?xml version="1.0" encoding="UTF-8"?>
         <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -167,14 +167,14 @@ You've got two options:
             </dependencies>
         </project>
         ```
-        2. After That create the package org.ega_archive.custom.elixirbeacon. (by default, our app will scan org.ega_archive.custom.elixirbeacon package to try to find candidates for our services) If you want to use a different package name, you must cusomizt your application properties name and add the property:
+        * After That create the package org.ega_archive.custom.elixirbeacon. (by default, our app will scan org.ega_archive.custom.elixirbeacon package to try to find candidates for our services) If you want to use a different package name, you must cusomizt your application properties name and add the property:
         ```
         custom.package.scan=org.my.custom
         ```
-        3. Inside that folder create a services package and a write your CustomImplementation 
+        * Inside that folder create a services package and a write your CustomImplementation 
         ```java
         package org.ega_archive.elixirbeacon.service;
-         
+        
         import org.ega_archive.elixirbeacon.dto.Beacon;
         import org.ega_archive.elixirbeacon.dto.BeaconAlleleResponse;
         import org.ega_archive.elixircore.helper.CommonQuery;
@@ -203,7 +203,7 @@ You've got two options:
           }
         }
         ```
-        4. Compile your code:
+        * Compile your code:
         ```bash
         mvn clean compile jar:jar
         ```
@@ -213,7 +213,7 @@ You've got two options:
         mvn install
         ```
         This will install the artifact in your local repo. After that try to compile again your custom code.
-        5. Execute the program with your code: First create an empty folder an copy there the original elixir jar (elixir-beacon-0.3.jar) then create a lib folder and put the elixir-beacon-custom-version.jar jar in that folder. After that you can run the program executing:
+        * Execute the program with your code: First create an empty folder an copy there the original elixir jar (elixir-beacon-0.3.jar) then create a lib folder and put the elixir-beacon-custom-version.jar jar in that folder. After that you can run the program executing:
         ```bash
         java -Dloader.path=lib/ -Dspring.profiles.active=test -jar elixir-beacon-0.3.jar
         ```
