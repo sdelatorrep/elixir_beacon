@@ -134,6 +134,7 @@ If compilation and test execution is successful, a JAR file will be generated in
 
 ##Extend/Change functionality
 You've got two options:
+
 1. Editing the source code.
     * If you want to add new functionalities (i. e. new endpoints).
 2. Changing the implementation class.
@@ -141,6 +142,7 @@ You've got two options:
     * You can write your own implementation for the interface org.ega_archive.elixirbeacon.ElixirBeaconService
     * This application uses Spring framework. If you are not familiar with it you can find information [here](http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/htmlsingle/). Specifically we use Spring boot, you can find information about Spring boot [here](https://docs.spring.io/spring-boot/docs/1.1.x/reference/htmlsingle/).
     * The following steps will allow you to make a custom implementation:
+    
         1. Create a new maven project: 
         ```xml
         <?xml version="1.0" encoding="UTF-8"?>
@@ -242,7 +244,9 @@ For other configurations please add a profile in pom.xml file. You will see the 
 The application publishes two endpoints:
 * /info
 * /query
+
 They're defined in the org.ega_archive.elixirbeacon.ElixirBeaconController class.
+
 ##/info
 Returns the information about this beacon: its Id, name and description, the API version it is compliant with, the URL where you can access this beacon, etc.
 https://egatest.crg.eu/elixir_demo_beacon/info
