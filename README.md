@@ -6,7 +6,7 @@
 
 #Configure databases
 ##Create databases
-Create a DB with the name you want (default name is *elixir_beacon_dev*):
+Create a DB with the name you want (default name is **elixir_beacon_dev**):
 ```bash
 createdb database_name -h server_host -p server_port -U super_user
 ```
@@ -23,7 +23,7 @@ psql -h server_host -p server_port -d database_name -U user_name < schema_dump.s
 ```
 You can skip step 2) and load the schema using a super user in step 3) and after that granting privileges to a normal user (this user will be used by the application to connect to the database).
 
-Create a second database (i. e. elixir_beacon_testing) that will be used in the tests.
+Create a second database (i. e. **elixir_beacon_testing**) that will be used in the tests.
 
 ##Load the data
 Use this script to parse a VCF input file:
@@ -69,15 +69,15 @@ The project has the following structure:
     * among other things, contains the .jar file with the compiled classes, libraries, etc.
 
 ##Configure application
-The key file is: /src/main/resources/application-{profile}.properties (see below [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
+The key file is **/src/main/resources/application-{profile}.properties** (see [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
 
-By default, the application is deployed at port 9075 and the context is elixirbeacon/v03/. You can change this by modifying the following lines of the properties file:
+By default, the application is deployed at port **9075** and the context is **/elixirbeacon/v03/**. You can change this by modifying the following lines of the properties file:
 ```INI
 server.port=9075
 server.servlet-path=/v03
 server.context-path=/elixirbeacon
 ```
-By default, the application uses two PostgreSQL databases with the name *elixir_beacon_dev* and *elixir_beacon_testing* (the latter is used to run the tests).
+By default, the application uses two PostgreSQL databases with the name **elixir_beacon_dev** and **elixir_beacon_testing** (the latter is used to run the tests).
 ```INI
 datasource.elixirbeacon.url=jdbc:postgresql://hostname:port/elixir_beacon_dev
 datasource.elixirbeacon.username=the_username
@@ -99,11 +99,11 @@ spring.jpa.properties.hibernate.connection.charSet = UTF-8
 7. Nothing to change.
  
 
-Do the same changes in /src/test/resources/application-{profile}.properties. By default, the database there is called elixir_beacon_testing.
+Do the same changes in **/src/test/resources/application-{profile}.properties**. By default, the database there is called *elixir_beacon_testing*.
 
-If you use a different DB than Postgres, you must add the corresponding library to the /lib folder inside the JAR or add the dependency to the pom.xml so maven can download the library (this will allow you to compile the code if you haven't done this yet).
+If you use a different DB than Postgres, you must add the corresponding library to the **/lib** folder inside the JAR or add the dependency to the pom.xml so maven can download the library (this will allow you to compile the code if you haven't done this yet).
 
-You can also change the sample requests that appear in the /info endpoint (see below [Using the application](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#using-the-application)) by modifying the values in application-{profile}.yml file:
+You can also change the sample requests that appear in the **/info** endpoint (see [Using the application](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#using-the-application)) by modifying some values in **application-{profile}.yml** file:
 ```yml
 #sample #1
 querySamples:
@@ -131,12 +131,14 @@ To compile the code run:
 mvn clean compile package -Dspring.profiles.active="dev"
 ```
 That will also execute the tests. To skip them add <code>-Dmaven.test.skip=true</code> to the command.
+
 To execute only the tests run:
 ```bash
 mvn test
 ```
 NOTE: To execute the tests you should have a database different than the main one (see the previous section).
-If compilation and test execution is successful, a JAR file will be generated in the folder */target* with the name elixir-beacon-0.3.jar
+
+If compilation and test execution is successful, a JAR file will be generated in the folder **/target** with the name **elixir-beacon-0.3.jar**
 
 ##Extend/Change functionality
 You've got two options:
@@ -145,7 +147,7 @@ You've got two options:
     * If you want to add new functionalities (i. e. new endpoints).
 2. Changing the implementation class.
     * If you want to change the way something is done (i. e. you want to modify the query, to check some requirements in the parameters, etc.)
-    * You can write your own implementation for the interface org.ega_archive.elixirbeacon.ElixirBeaconService
+    * You can write your own implementation for the interface **org.ega_archive.elixirbeacon.ElixirBeaconService**
     * This application uses [Spring framework](http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/htmlsingle/). Specifically we use [Spring boot](https://docs.spring.io/spring-boot/docs/1.1.x/reference/htmlsingle/).
     * The following steps will allow you to make a custom implementation:
         * Create a new maven project:
@@ -173,7 +175,7 @@ You've got two options:
             </dependencies>
         </project>
         ```
-        * After That create the package <code>org.ega_archive.custom.elixirbeacon.</code> (by default, our app will scan <code>org.ega_archive.custom.elixirbeacon</code> package to try to find candidates for our services) If you want to use a different package name, you must cusomize your application properties name and add the property:
+        * After That create the package **org.ega_archive.custom.elixirbeacon.** (by default, our app will scan org.ega_archive.custom.elixirbeacon package to try to find candidates for our services) If you want to use a different package name, you must cusomize your application properties name and add the property:
         ```INI
         custom.package.scan=org.my.custom
         ```
@@ -213,7 +215,8 @@ You've got two options:
         ```bash
         mvn clean compile jar:jar
         ```
-        This will generate a <code>elixir-beacon-custom-version.jar</code>
+        This will generate a **elixir-beacon-custom-version.jar**.
+        
         If you get an error of the depency not found, it it because you don't have a repo with the dependency artifact. In this case, you can go to the elixir-beacon aritfact and execute:
         ```bash
         mvn install
@@ -221,7 +224,7 @@ You've got two options:
         This will install the artifact in your local repo. After that try to compile again your custom code.
         * Execute the program with your code: 
             * First create an empty folder an copy there the original elixir jar (elixir-beacon-0.3.jar)
-            * Then create a lib folder and put the elixir-beacon-custom-version.jar jar in that folder
+            * Then create a /lib folder and put the elixir-beacon-custom-version.jar jar in that folder
             * After that you can run the program executing:
             ```bash
             java -Dloader.path=lib/ -Dspring.profiles.active=test -jar elixir-beacon-0.3.jar
@@ -232,18 +235,26 @@ To deploy the JAR run:
  ```bash
 java -jar elixir-beacon-0.3.jar --spring.profiles.active=test
  ```
-It will generate a log in the file application.log located in the same folder where the JAR is.
-This argument <code>--spring.profiles.active=test</code> specifies the profile to be used. By default, there are 2 profiles: dev and test. Each profile will use its own set of properties files. I. e. *test* profile will use <code>application-test.properties</code> and <code>application-test.yml</code>
-Using the default configuration, the application will be available at: localhost:9075/elixirbeacon/v03/
+It will generate a log in the file **application.log** located in the same folder where the JAR is located.
+
+This argument <code>--spring.profiles.active=test</code> specifies the profile to be used. By default, there are 2 profiles: **dev** and **test**. Each profile will use its own set of properties files. 
+
+I. e. **test** profile will use:
+* application-test.properties
+* application-test.yml
+
+Using the default configuration, the application will be available at: **localhost:9075/elixirbeacon/v03/**
 
 ##Run integration tests
-We use JMeter to run this kind of tests. We have an artifact called elixir-beacon-service-tests. To get the code execute a git pull from the elixir_beacon_tests project at [Elixir's Human Data Beacon repository](https://github.com/elixirhub/human-data-beacon).
+We use JMeter to run this kind of tests. We have an artifact called **elixir-beacon-service-tests**. To get the code execute a git pull from the elixir_beacon_tests project at [Elixir's Human Data Beacon repository](https://github.com/elixirhub/human-data-beacon).
+
 Once you've downloaded this project you can just run:
 ```bash
 mvn -P local clean verify
  ```
 This will download jmeter and run some basic tests.
-The " -P local" refers to a maven profile. These profiles can be found in the file pom.xml. The "local" profile uses this configuration for running the tests:
+
+The <code>-P local</code> refers to a maven profile. These profiles can be found in the file pom.xml. The **local** profile uses this configuration for running the tests:
 * host: localhost 
 * port: 9075 
 For other configurations please add a profile in pom.xml file. You will see the results on the console.
@@ -253,7 +264,7 @@ The application publishes two endpoints:
 * /info
 * /query
 
-They're defined in the org.ega_archive.elixirbeacon.ElixirBeaconController class.
+They are defined in the **org.ega_archive.elixirbeacon.ElixirBeaconController** class.
 
 ##/info
 Returns the information about this beacon: its Id, name and description, the API version it is compliant with, the URL where you can access this beacon, etc.
