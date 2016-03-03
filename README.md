@@ -38,6 +38,7 @@ Run this script executing:
 ./vcf_parser.sh dataset_id < file.vcf
 ```
 This script will generate an output file called file.SNPs.
+
 Load the dataset information into beacon_dataset table.
 ```sql
 INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
