@@ -55,19 +55,19 @@ cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY table_name(dat
 Execute a git pull from this repository.
 The project has the following structure:
 * /src/main/java
-**Java files (.java).
+    *Java files (.java).
 * /src/main/resources
-** configuration files: .properies, .yml
+    * configuration files: .properies, .yml
 * /src/test/java
-** Java classes for testing.
+    * Java classes for testing.
 * /src/test/resources
-** configuration files for testing: .properties, .yml
+    * configuration files for testing: .properties, .yml
 * /target/generated-sources/java
-** auto generated Java files.
+    * auto generated Java files.
 * /target/classes
-** compiled files (.class).
+    * compiled files (.class).
 * /target
-** among other things, contains the .jar file with the compiled classes, libraries, etc.
+    * among other things, contains the .jar file with the compiled classes, libraries, etc.
 
 Configure application
 The key file is: /src/main/resources/application-{profile}.properties (see below Deploy JAR for more information about profiles).
@@ -87,21 +87,21 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialec
 spring.jpa.properties.hibernate.connection.charSet = UTF-8
 ```
 1. specify the type of the database (postgresql), the hostname, port and finally the database name.
-* I. e. if you use MySQL: jdbc:mysql
+    * I. e. if you use MySQL: jdbc:mysql
 2. username that will be used to connect to the database.
 3. password of that username.
 4. driver class name 
-* if you use MySQL: com.mysql.jdbc.Driver
+    * if you use MySQL: com.mysql.jdbc.Driver
 5. Nothing to change.
 6. hibernate dialect.
-* if you use MySQL: org.hibernate.dialect.MySQLDialect
+    * if you use MySQL: org.hibernate.dialect.MySQLDialect
 7. Nothing to change.
  
 
 Do the same changes in /src/test/resources/application-{profile}.properties. By default, the database there is called elixir_beacon_testing.
 If you use a different DB than Postgres, you must add the corresponding library to the /lib folder inside the JAR or add the dependency to the pom.xml so maven can download the library (this will allow you to compile the code if you haven't done this yet).
 You can also change the sample requests that appear in the /info endpoint (see below Using the application) by modifying the values in application-{profile}.yml file:
-```
+```yml
 #sample #1
 querySamples:
   reference-set-1: GRCh37
