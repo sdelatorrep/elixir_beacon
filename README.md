@@ -6,7 +6,7 @@
 
 #Configure databases
 ##Create databases
-Create a DB with the name you want (default name is elixir_beacon_dev):
+Create a DB with the name you want (default name is *elixir_beacon_dev*):
 ```bash
 createdb database_name -h server_host -p server_port -U super_user
 ```
@@ -22,6 +22,7 @@ Load the schema dump into the DB (download it here):
 psql -h server_host -p server_port -d database_name -U user_name < schema_dump.sql
 ```
 You can skip step 2) and load the schema using a super user in step 3) and after that granting privileges to a normal user (this user will be used by the application to connect to the database).
+
 Create a second database (i. e. elixir_beacon_testing) that will be used in the tests.
 
 ##Load the data
