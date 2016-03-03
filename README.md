@@ -39,12 +39,12 @@ Run this script executing:
 ```
 This script will generate an output file called file.SNPs.
 
-Load the dataset information into beacon_dataset table.
+Load the dataset information into beacon_dataset_table.
 ```sql
 INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
     VALUES ('dataset_id', 'dataset_description', 'i. e. PUBLIC', 'i. e. grch37', 123456);
 ```
-Load the generated file into beacon_data table:
+Load the generated file into beacon_data_table:
 ```
 cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY table_name(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
 ```
