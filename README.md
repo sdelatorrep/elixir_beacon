@@ -7,18 +7,18 @@
 #Configure databases
 ##Create databases
 Create a DB with the name you want (default name is **elixir_beacon_dev**):
-```bash
+```
 createdb database_name -h server_host -p server_port -U super_user
 ```
 Log in the DB and grant privileges to a normal user (that is, not a super user):
-```bash
+```
 psql database_name -U super_user
 ```
 ```sql
 GRANT ALL PRIVILEGES ON DATABASE database_name TO normal_user;
 ```
 Load the schema dump into the DB (download it here):
-```bash
+```
 psql -h server_host -p server_port -d database_name -U user_name < schema_dump.sql
 ```
 You can skip step 2) and load the schema using a super user in step 3) and after that granting privileges to a normal user (this user will be used by the application to connect to the database).
@@ -27,14 +27,14 @@ Create a second database (i. e. **elixir_beacon_testing**) that will be used in 
 
 ##Load the data
 Use this script to parse a VCF input file:
-```bash
+```
 #!/bin/bash
 grep -v "#"| cut -f1,2,4,5,7 | sort | uniq | awk -v ds=$1 '
 { if ( (length($3) == 1 && length($4) == 1) && ($5 == "PASS" || $5 == ".")) print ds";"$1";"$2";"$4}
 ' > file.SNPs
 ```
 Run this script executing:
-```bash
+```
 ./vcf_parser.sh dataset_id < file.vcf
 ```
 This script will generate an output file called file.SNPs.
@@ -45,7 +45,7 @@ INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
     VALUES ('dataset_id', 'dataset_description', 'i. e. PUBLIC', 'i. e. grch37', 123456);
 ```
 Load the generated file into beacon_data table:
-```bash
+```
 cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY table_name(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
 ```
 
@@ -128,13 +128,13 @@ querySamples:
 ```
 ##Compile and test the code
 To compile the code run:
-```bash
+```
 mvn clean compile package -Dspring.profiles.active="dev"
 ```
 That will also execute the tests. To skip them add <code>-Dmaven.test.skip=true</code> to the command.
 
 To execute only the tests run:
-```bash
+```
 mvn test
 ```
 NOTE: To execute the tests you should have a database different than the main one (see the previous section).
@@ -213,13 +213,13 @@ You've got two options:
         }
         ```
         * Compile your code:
-        ```bash
+        ```
         mvn clean compile jar:jar
         ```
         This will generate a **elixir-beacon-custom-version.jar**.
         
         If you get an error of the depency not found, it it because you don't have a repo with the dependency artifact. In this case, you can go to the elixir-beacon aritfact and execute:
-        ```bash
+        ```
         mvn install
         ```
         This will install the artifact in your local repo. After that try to compile again your custom code.
@@ -227,13 +227,13 @@ You've got two options:
             * First create an empty folder an copy there the original elixir jar (elixir-beacon-0.3.jar)
             * Then create a /lib folder and put the elixir-beacon-custom-version.jar jar in that folder
             * After that you can run the program executing:
-            ```bash
+            ```
             java -Dloader.path=lib/ -Dspring.profiles.active=test -jar elixir-beacon-0.3.jar
             ```
 
 ##Deploy the JAR
 To deploy the JAR run:
- ```bash
+ ```
 java -jar elixir-beacon-0.3.jar --spring.profiles.active=test
  ```
 It will generate a log in the file **application.log** located in the same folder where the JAR is located.
@@ -250,7 +250,7 @@ Using the default configuration, the application will be available at: **localho
 We use JMeter to run this kind of tests. We have an artifact called **elixir-beacon-service-tests**. To get the code execute a git pull from the elixir_beacon_tests project at [Elixir's Human Data Beacon repository](https://github.com/elixirhub/human-data-beacon).
 
 Once you've downloaded this project you can just run:
-```bash
+```
 mvn -P local clean verify
  ```
 This will download jmeter and run some basic tests.
@@ -389,7 +389,7 @@ The 3 examples that appear in field sampleAlleleRequests can be customized by mo
 ##/query
 To actually ask the beacon for questions like "do you have any genomes with an 'A' at position 100,735 on chromosome 3?" And the answer will be yes or no.
 
-https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37)
+https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37
 ```json
 {
   "beaconId" : "elixir-demo-beacon",
