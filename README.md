@@ -1,8 +1,8 @@
 #Requirements
-Java 8 JRE (or SDK if the code needs to be compiled)
-Apache Maven 3
-PostgreSQL Server or any other SQL server (i. e. MySQL)
-JMeter
+* Java 8 JRE (or SDK if the code needs to be compiled)
+* Apache Maven 3
+* PostgreSQL Server or any other SQL server (i. e. MySQL)
+* JMeter
 
 #Configure databases
 ##Create databases
@@ -144,7 +144,7 @@ You've got two options:
 2. Changing the implementation class.
     * If you want to change the way something is done (i. e. you want to modify the query, to check some requirements in the parameters, etc.)
     * You can write your own implementation for the interface org.ega_archive.elixirbeacon.ElixirBeaconService
-    * This application uses Spring framework. If you are not familiar with it you can find information in http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/htmlsingle/ Specifically we use Spring boot, you can find information about Spring boot at https://docs.spring.io/spring-boot/docs/1.1.x/reference/htmlsingle/
+    * This application uses Spring framework. If you are not familiar with it you can find information [here](http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/htmlsingle/). Specifically we use Spring boot, you can find information about Spring boot [here](https://docs.spring.io/spring-boot/docs/1.1.x/reference/htmlsingle/).
     * The following steps will allow you to make a custom implementation:
         1. Create a new maven project: 
         ```xml
@@ -232,9 +232,9 @@ This argument --spring.profiles.active=test specifies the profile to be used. By
 Using the default configuration, the application will be available at: localhost:9075/elixirbeacon/v03/
 
 ##Run integration tests
-We use JMeter to run this kind of tests. We have an artifact called elixir-beacon-service-tests. To get the code execute a git pull from the public repository located at: ********PASTE THE URL*************
+We use JMeter to run this kind of tests. We have an artifact called elixir-beacon-service-tests. To get the code execute a git pull from the elixir_beacon_tests project at [Elixir's Human Data Beacon repository](https://github.com/elixirhub/human-data-beacon).
 Once you've downloaded this project you can just run:
-  ```bash
+```bash
 mvn -P local clean verify
  ```
 This will download jmeter and run some basic tests.
@@ -250,7 +250,7 @@ The application publishes two endpoints:
 They're defined in the org.ega_archive.elixirbeacon.ElixirBeaconController class.
 ##/info
 Returns the information about this beacon: its Id, name and description, the API version it is compliant with, the URL where you can access this beacon, etc.
-(/elixir_demo_beacon/info)
+https://egatest.crg.eu/elixir_demo_beacon/info
 ```json
 {
   "id" : "elixir-demo-beacon",
@@ -368,7 +368,7 @@ The 3 examples that appear in field sampleAlleleRequests can be customized by mo
 
 ##/query
 To actually ask the beacon for questions like "do you have any genomes with an 'A' at position 100,735 on chromosome 3?" And the answer will be yes or no.
-(/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37)
+https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37)
 ```json
 {
   "beaconId" : "elixir-demo-beacon",
@@ -386,7 +386,7 @@ To actually ask the beacon for questions like "do you have any genomes with an '
 }
 ```
 Or you can ask for the same information in an specific dataset:
-(/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37&datasetIds=EGAD00001000740)
+https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37&datasetIds=EGAD00001000740
 ```json
 {
   "beaconId" : "elixir-demo-beacon",
