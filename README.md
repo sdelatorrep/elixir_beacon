@@ -27,7 +27,7 @@ Create a second database (i. e. **elixir_beacon_testing**) that will be used in 
 
 ##Load the data
 Use this script to parse a VCF input file:
-```
+```bash
 #!/bin/bash
 grep -v "#"| cut -f1,2,4,5,7 | sort | uniq | awk -v ds=$1 '
 { if ( (length($3) == 1 && length($4) == 1) && ($5 == "PASS" || $5 == ".")) print ds";"$1";"$2";"$4}
