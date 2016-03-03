@@ -51,7 +51,7 @@ cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY table_name(dat
 
 #Managing the code
 ##Download the project
-Execute a git pull from this repository.
+Execute a git pull from the projects **elixir_beacon** (current one) and **elixir_core** located at the [Elixir' repository](https://github.com/elixirhub/human-data-beacon).
 
 The project has the following structure:
 * /src/main/java
@@ -68,6 +68,19 @@ The project has the following structure:
     * compiled files (.class).
 * /target
     * among other things, contains the .jar file with the compiled classes, libraries, etc.
+
+##Elixir Core
+First of all, it is necessary to compile the code of the **elixir_core** project because it is a dependency of the main project, elixir_beacon.
+```
+mvn clean compile jar:jar
+```
+This will generate the JAR file **elixir-core-beacon_api_v0.3-SNAPSHOT.jar**
+
+Then execute:
+```
+mvn install
+```
+Now this dependency will find when compiling the main project, elixir_beacon.
 
 ##Configure application
 The key file is **/src/main/resources/application-{profile}.properties** (see [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
