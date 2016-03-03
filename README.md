@@ -80,7 +80,7 @@ Then execute:
 ```
 mvn install
 ```
-Now this dependency will find when compiling the main project, elixir_beacon.
+Now this dependency will be found when compiling the main project, elixir_beacon.
 
 ##Configure application
 The key file is **/src/main/resources/application-{profile}.properties** (see [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
