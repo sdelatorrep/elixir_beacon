@@ -68,12 +68,15 @@ The project has the following structure:
     * among other things, contains the .jar file with the compiled classes, libraries, etc.
 
 ##Configure application
-The key file is: /src/main/resources/application-{profile}.properties (see below Deploy JAR for more information about profiles).
+The key file is: /src/main/resources/application-{profile}.properties (see below [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
+
 By default, the application is deployed at port 9075 and the context is elixirbeacon/v03/. You can change this by modifying the following lines of the properties file:
+```INI
 application-dev.properties
 server.port=9075
 server.servlet-path=/v03
 server.context-path=/elixirbeacon
+```
 By default, the application uses two PostgreSQL databases with the name elixir_beacon_dev and elixir_beacon_testing (the latter is used to run the tests).
 ```INI
 datasource.elixirbeacon.url=jdbc:postgresql://hostname:port/elixir_beacon_dev
