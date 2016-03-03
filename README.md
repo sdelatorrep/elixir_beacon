@@ -67,7 +67,7 @@ The project has the following structure:
 * /target
     * among other things, contains the .jar file with the compiled classes, libraries, etc.
 
-Configure application
+##Configure application
 The key file is: /src/main/resources/application-{profile}.properties (see below Deploy JAR for more information about profiles).
 By default, the application is deployed at port 9075 and the context is elixirbeacon/v03/. You can change this by modifying the following lines of the properties file:
 application-dev.properties
