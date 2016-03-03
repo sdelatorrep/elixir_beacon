@@ -50,9 +50,10 @@ cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY table_name(dat
 #Managing the code
 ##Download the project
 Execute a git pull from this repository.
+
 The project has the following structure:
 * /src/main/java
-    *Java files (.java).
+    * Java files (.java).
 * /src/main/resources
     * configuration files: .properies, .yml
 * /src/test/java
