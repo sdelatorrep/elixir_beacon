@@ -29,12 +29,7 @@ Use this script to parse a VCF input file:
 ```bash
 #!/bin/bash
 grep -v "#"| cut -f1,2,4,5,7 | sort | uniq | awk -v ds=$1 '
-{ if ( ($5 == "PASS" || $5 == "InDel" || $5 == ".") )
-    if ( numTokens=split($4,tokens,",") )
-        for( i = 1; i <= numTokens; i ++ ) {
-            print ds";"$1";"$2";"$3";"tokens[i]
-        }
-    }
+{ if ( (length($3) == 1 && length($4) == 1) && ($5 == "PASS" || $5 == ".")) print ds";"$1";"$2";"$4}
 ' > file.SNPs
 ```
 Run this script executing:
@@ -49,7 +44,7 @@ INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
 ```
 Load the generated file into beacon_data table:
 ```bash
-cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY table_name(dataset_id,chromosome,position,reference,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
+cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY table_name(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
 ```
 
 #Managing the code
