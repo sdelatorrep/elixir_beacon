@@ -155,7 +155,7 @@ NOTE: To execute the tests you should have a database different than the main on
 If compilation and test execution is successful, a JAR file will be generated in the folder **/target** with the name **elixir-beacon-0.3.jar**
 
 ##Extend/Change functionality
-You've got two options:
+You have two options:
 
 1. Editing the source code.
     * If you want to add new functionalities (i. e. new endpoints).
@@ -262,7 +262,7 @@ Using the default configuration, the application will be available at: **localho
 ##Run integration tests
 We use JMeter to run this kind of tests. We have an artifact called **elixir-beacon-service-tests**. To get the code execute a git pull from the elixir_beacon_tests project at [Elixir's Human Data Beacon repository](https://github.com/elixirhub/human-data-beacon).
 
-Once you've downloaded this project you can just run:
+Once you have downloaded this project you can just run:
 ```
 mvn -P local clean verify
  ```
