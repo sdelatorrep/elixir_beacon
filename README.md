@@ -162,7 +162,7 @@ I. e. **dev** profile will use:
 * application-dev.properties
 * application-dev.yml
 
-Using the default configuration, the application will be available at: <localhost:9075/elixirbeacon/v03/>
+Using the default configuration, the application will be available at: [localhost:9075/elixirbeacon/v03/]
 
 ##Run integration tests
 We use JMeter to run this kind of tests. We have an artifact called **elixir-beacon-service-tests**. 
