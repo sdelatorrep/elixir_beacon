@@ -508,6 +508,7 @@ This will download jmeter and run some basic tests.
 The <code>-P local</code> refers to a maven profile. These profiles can be found in the file pom.xml. The **local** profile uses this configuration for running the tests:
 * host: localhost 
 * port: 9075 
+
 For other configurations please add a profile in pom.xml file. You will see the results on the console.
 
 #Using the application
