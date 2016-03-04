@@ -266,22 +266,22 @@ grep -v "#"| cut -f1,2,4,5,7 | sort | uniq | awk -v ds=$1 '
 { if ( (length($3) == 1 && length($4) == 1) && ($5 == "PASS" || $5 == ".")) print ds";"$1";"$2";"$4}
 ' > file.SNPs
 ```
-1. Copy the content into a file called vcf_parser.sh and give it executable rights:
+* Copy the content into a file called vcf_parser.sh and give it executable rights:
 ```
 chmod +x vcf_parser.sh
 ```
-2. Run this script executing:
+* Run this script executing:
 ```
 ./vcf_parser.sh dataset_id < file.vcf
 ```
 This script will generate an output file called file.SNPs.
 
-3. Load the dataset information into **beacon_dataset_table**.
+* Load the dataset information into **beacon_dataset_table**.
 ```sql
 INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
     VALUES ('dataset_id', 'dataset_description', 'i. e. PUBLIC', 'i. e. grch37', 123456);
 ```
-4. Load the generated file into **beacon_data_table**:
+* Load the generated file into **beacon_data_table**:
 ```
 cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
 ```
