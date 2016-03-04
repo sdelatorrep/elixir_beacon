@@ -23,7 +23,7 @@ GRANT ALL PRIVILEGES ON DATABASE database_name TO normal_user;
 ```
 You can skip this step and load the schema using a super user in the next step and after that, granting privileges to a normal user (this user will be used by the application to connect to the database).
 
-* Download the schema script from [here](https://github.com/sdelatorrep/elixir_beacon/blob/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql) and run it into **both** databases: 
+* Download the schema script from [here](https://github.com/sdelatorrep/elixir_beacon/blob/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql) and run it in **both** databases: 
 ```
 psql -h server_host -p server_port -d database_name -U user_name < elixir_beacon_db_schema.sql
 ```
