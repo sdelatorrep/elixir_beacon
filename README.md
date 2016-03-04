@@ -56,7 +56,7 @@ INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
 
 * Load the generated file into **beacon_data_table**:
 ```
-cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
+cat dataset_id.SNPs | psql -h server_host -p port -U user_name -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
 ```
 
 #Managing the code
