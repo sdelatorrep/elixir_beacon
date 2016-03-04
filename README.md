@@ -23,11 +23,18 @@ GRANT ALL PRIVILEGES ON DATABASE database_name TO normal_user;
 ```
 You can skip this step and load the schema using a super user in the next step and after that, granting privileges to a normal user (this user will be used by the application to connect to the database).
 
-* Download the schema script from [here](https://github.com/sdelatorrep/elixir_beacon/blob/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql) and run it in **both** databases: 
+* Download the schema script from [here](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql) and run it in **both** databases: 
 ```
 psql -h server_host -p server_port -d database_name -U user_name < elixir_beacon_db_schema.sql
 ```
 That script will create the schema and also load some essential data for data use conditions.
+
+If you use a super user to create the schema then you will need to grant access to the "normal" user that will be used by the application (that user we created in the second step):
+```sql
+GRAN ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO USER user_name;
+GRAN ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO USER user_name;
+```
+Remember to run these lines in both databases.
 
 ##Load the data
 Use this script to parse a VCF input file:
@@ -52,6 +59,8 @@ This script will generate an output file called file.SNPs.
 INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
     VALUES ('dataset_id', 'dataset_description', 'i. e. PUBLIC', 'i. e. grch37', 123456);
 ```
+The size is the number of rows inserted in beacon_data_table for this dataset.
+
 * Load the generated file into **beacon_data_table**:
 ```
 cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
@@ -274,7 +283,7 @@ I. e. **test** profile will use:
 * application-test.properties
 * application-test.yml
 
-Using the default configuration, the application will be available at: **localhost:9075/elixirbeacon/v03/**
+Using the default configuration, the application will be available at: <localhost:9075/elixirbeacon/v03/>
 
 ##Run integration tests
 We use JMeter to run this kind of tests. We have an artifact called **elixir-beacon-service-tests**. 
@@ -295,12 +304,12 @@ For other configurations please add a profile in pom.xml file. You will see the 
 
 #Using the application
 The application publishes two endpoints:
-* /info
-* /query
+* /beacon/info
+* /beacon/query
 
 They are defined in the **org.ega_archive.elixirbeacon.ElixirBeaconController** class.
 
-##/info
+##/beacon/info
 Returns the information about this beacon: its Id, name and description, the API version it is compliant with, the URL where you can access this beacon, etc.
 
 https://egatest.crg.eu/elixir_demo_beacon/info
@@ -419,7 +428,7 @@ https://egatest.crg.eu/elixir_demo_beacon/info
 ```
 The 3 examples that appear in field sampleAlleleRequests can be customized by modifying **application-{profile}.yml** as explained in [Configure application](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#configure-application).
 
-##/query
+##/beacon/query
 To actually ask the beacon for questions like "do you have any genomes with an 'A' at position 100,735 on chromosome 3?" And the answer will be yes or no.
 
 https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37
