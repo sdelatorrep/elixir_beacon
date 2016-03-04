@@ -37,14 +37,7 @@ GRAN ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO USER user_name;
 Remember to run these lines in both databases.
 
 ##Load the data
-Use this script to parse a VCF input file:
-```bash
-#!/bin/bash
-grep -v "#"| cut -f1,2,4,5,7 | sort | uniq | awk -v ds=$1 '
-{ if ( (length($3) == 1 && length($4) == 1) && ($5 == "PASS" || $5 == ".")) print ds";"$1";"$2";"$4}
-' > file.SNPs
-```
-* Copy the content into a file called vcf_parser.sh and give it executable rights:
+* Download the script to parse VCF files [here](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/vcf_parser.sh) and give it executable rights:
 ```
 chmod +x vcf_parser.sh
 ```
@@ -52,14 +45,14 @@ chmod +x vcf_parser.sh
 ```
 ./vcf_parser.sh dataset_id < file.vcf
 ```
-This script will generate an output file called file.SNPs.
+This script will generate an output file called dataset_id.SNPs.
+It will also output the number of variants extracted from the VCF. This value is the "size" in the next step.
 
 * Load the dataset information into **beacon_dataset_table**.
 ```sql
 INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
     VALUES ('dataset_id', 'dataset_description', 'i. e. PUBLIC', 'i. e. grch37', 123456);
 ```
-The size is the number of rows inserted in beacon_data_table for this dataset.
 
 * Load the generated file into **beacon_data_table**:
 ```
