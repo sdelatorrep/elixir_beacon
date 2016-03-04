@@ -635,7 +635,7 @@ https://egatest.crg.eu/elixir_demo_beacon/info
   }
 }
 ```
-The 3 examples that appear in field sampleAlleleRequests can be customized by modifying application-{profile}.yml as explained in Configure application.
+The 3 examples that appear in field sampleAlleleRequests can be customized by modifying **application-{profile}.yml** as explained in [Configure application](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#configure-application).
 
 ##/query
 To actually ask the beacon for questions like "do you have any genomes with an 'A' at position 100,735 on chromosome 3?" And the answer will be yes or no.
