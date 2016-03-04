@@ -27,7 +27,8 @@ public class BeaconDataPK implements Serializable {
 
 	private Integer position;
 
-	private String allele;
+	@Column(name="alternate")
+	private String alternateBases;
 	
 	@Column(name="reference_genome")
 	private String referenceGenome;

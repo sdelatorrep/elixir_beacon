@@ -56,6 +56,4 @@ public class Beacon {
   // Additional structured metadata, key-value pairs
   private Map<String, String> info;
   
-  private String size;
-  
 }

@@ -130,9 +130,18 @@ public class ElixirBeaconServiceTest {
   }
   
   @Test
-  public void checkParamPositionMissing() {
+  public void checkParamPositionAndStartMissing() {
     BeaconAlleleResponse response = new BeaconAlleleResponse();
-    elixirBeaconService.checkParams(response, null, null, null, "12", null, "grch37");
+    elixirBeaconService.checkParams(response, null, null, null, "12", null, null, "grch37");
+
+    assertThat(response.getError(), notNullValue());
+    assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.PRECONDITION_FAILED.value()));
+  }
+  
+  @Test
+  public void checkParamBothPositionAndStartArePresent() {
+    BeaconAlleleResponse response = new BeaconAlleleResponse();
+    elixirBeaconService.checkParams(response, null, null, null, "12", 123, 123, "grch37");
 
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.PRECONDITION_FAILED.value()));
@@ -141,7 +150,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void checkParamChromosomeMissing() {
     BeaconAlleleResponse response = new BeaconAlleleResponse();
-    elixirBeaconService.checkParams(response, null, null, null, "", 429, "grch37");
+    elixirBeaconService.checkParams(response, null, null, null, "", 429, null, "grch37");
 
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.PRECONDITION_FAILED.value()));
@@ -150,7 +159,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void checkParamReferenceGenomeMissing() {
     BeaconAlleleResponse response = new BeaconAlleleResponse();
-    elixirBeaconService.checkParams(response, null, null, null, "12", 429, null);
+    elixirBeaconService.checkParams(response, null, null, null, "12", 429, null, null);
 
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.PRECONDITION_FAILED.value()));
@@ -159,7 +168,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void checkDatasetParamNotFound() {
     BeaconAlleleResponse response = new BeaconAlleleResponse();
-    elixirBeaconService.checkParams(response, Arrays.asList("invented dataset"), "", null, "1", 1234, "GRCh37");
+    elixirBeaconService.checkParams(response, Arrays.asList("invented dataset"), "", null, "1", 1234, null, "GRCh37");
     
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.NOT_FOUND.value()));
@@ -168,7 +177,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void checkDatasetParamUnauthenticatedUser() {
     BeaconAlleleResponse response = new BeaconAlleleResponse();
-    elixirBeaconService.checkParams(response, Arrays.asList("EGAD00000000002"), "", null, "1", 1234, "GRCh37");
+    elixirBeaconService.checkParams(response, Arrays.asList("EGAD00000000002"), "", null, "1", 1234, null, "GRCh37");
     
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.UNAUTHORIZED.value()));
@@ -179,7 +188,7 @@ public class ElixirBeaconServiceTest {
     String datasetStableId = "EGAD00000000003";
 
     BeaconAlleleResponse response = new BeaconAlleleResponse();
-    elixirBeaconService.checkParams(response, Arrays.asList(datasetStableId), "", null, "1", 1234, "GRCh37");
+    elixirBeaconService.checkParams(response, Arrays.asList(datasetStableId), "", null, "1", 1234, null, "GRCh37");
     
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.UNAUTHORIZED.value()));
@@ -188,7 +197,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void checkReferenceGenomeParamMatchesDataset() {
     BeaconAlleleResponse response = new BeaconAlleleResponse();
-    elixirBeaconService.checkParams(response, Arrays.asList("EGAD00000000001"), "", null, "1", 1234, "GRCh38");
+    elixirBeaconService.checkParams(response, Arrays.asList("EGAD00000000001"), "", null, "1", 1234, null, "GRCh38");
     
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.PRECONDITION_FAILED.value()));
@@ -197,7 +206,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void checkAlternateBasesParamNotValid1() {
     BeaconAlleleResponse response = new BeaconAlleleResponse();
-    elixirBeaconService.checkParams(response, null, "R", null, "13", 1, "GRCh37");
+    elixirBeaconService.checkParams(response, null, "R", null, "13", 1, null, "GRCh37");
     
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.PRECONDITION_FAILED.value()));
@@ -206,7 +215,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void checkAlternateBasesParamNotValid2() {
     BeaconAlleleResponse response = new BeaconAlleleResponse();
-    elixirBeaconService.checkParams(response, null, "DA", null, "13", 1, "GRCh37");
+    elixirBeaconService.checkParams(response, null, "DA", null, "13", 1, null, "GRCh37");
     
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.PRECONDITION_FAILED.value()));
@@ -215,7 +224,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void checkReferenceBasesParamNotValid1() {
     BeaconAlleleResponse response = new BeaconAlleleResponse();
-    elixirBeaconService.checkParams(response, null, null, "P", "13", 1, "GRCh37");
+    elixirBeaconService.checkParams(response, null, null, "P", "13", 1, null, "GRCh37");
     
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.PRECONDITION_FAILED.value()));
@@ -224,14 +233,14 @@ public class ElixirBeaconServiceTest {
   @Test
   public void queryOneDataset() throws Exception {
     BeaconAlleleResponse response =
-        elixirBeaconService.queryBeacon(Arrays.asList("EGAD00000000001"), "A", null, "X", 1, "GRCh37");
+        elixirBeaconService.queryBeacon(Arrays.asList("EGAD00000000001"), "A", null, "X", null, 1, "GRCh37");
 
     assertThat(response.isExists(), equalTo(true));
     assertThat(response.getDatasetAlleleResponses().get(0).getDatasetId(), equalTo("EGAD00000000001"));
     assertThat(response.getDatasetAlleleResponses().get(0).isExists(), equalTo(true));
     
     response =
-        elixirBeaconService.queryBeacon(Arrays.asList("EGAD00000000001"), "A", null, "X", 11111, "GRCh37");
+        elixirBeaconService.queryBeacon(Arrays.asList("EGAD00000000001"), "A", null, "X", 11111, null, "GRCh37");
 
     assertThat(response.isExists(), equalTo(false));
     assertThat(response.getDatasetAlleleResponses().get(0).getDatasetId(), equalTo("EGAD00000000001"));
@@ -242,7 +251,7 @@ public class ElixirBeaconServiceTest {
   public void queryMultipleDatasets() throws Exception {
     
     BeaconAlleleResponse response =
-        elixirBeaconService.queryBeacon(Arrays.asList("EGAD00000000001", "EGAD00000000005"), "A", null, "X", 1, "GRCh37");
+        elixirBeaconService.queryBeacon(Arrays.asList("EGAD00000000001", "EGAD00000000005"), "A", null, "X", 1, null, "GRCh37");
 
     assertThat(response.isExists(), equalTo(true));
     assertThat(response.getDatasetAlleleResponses().get(0).getDatasetId(), equalTo("EGAD00000000001"));
@@ -254,7 +263,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void queryAllDatasetAndGetAPositiveAnswer() throws Exception {
     BeaconAlleleResponse response =
-        elixirBeaconService.queryBeacon(null, "A", "C", "X", 1, "GRCh37");
+        elixirBeaconService.queryBeacon(null, "A", "C", "X", 1, null, "GRCh37");
 
     assertThat(response.isExists(), equalTo(true));
     assertThat(response.getDatasetAlleleResponses(), nullValue());
@@ -263,7 +272,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void queryAllDatasetAndGetANegativeAnswer() throws Exception {
     BeaconAlleleResponse response =
-        elixirBeaconService.queryBeacon(null, "T", null, "12", 1, "GRCh37");
+        elixirBeaconService.queryBeacon(null, "T", null, "12", 1, null, "GRCh37");
 
     assertThat(response.isExists(), equalTo(false));
     assertThat(response.getDatasetAlleleResponses(), nullValue());
@@ -272,7 +281,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void queryAllDatasetPassingEmptyString() throws Exception {
     BeaconAlleleResponse response =
-        elixirBeaconService.queryBeacon(Arrays.asList(""), null, null, "X", 1, "GRCh37");
+        elixirBeaconService.queryBeacon(Arrays.asList(""), null, null, "X", 1, null, "GRCh37");
 
     assertThat(response.isExists(), equalTo(true));
     assertThat(response.getDatasetAlleleResponses(), nullValue());
@@ -281,7 +290,7 @@ public class ElixirBeaconServiceTest {
   @Test
   public void queryAllDatasetPassingEmptyArray() throws Exception {
     BeaconAlleleResponse response =
-        elixirBeaconService.queryBeacon(Arrays.asList(), null, null, "X", 1, "GRCh37");
+        elixirBeaconService.queryBeacon(Arrays.asList(), null, null, "X", 1, null, "GRCh37");
 
     assertThat(response.isExists(), equalTo(true));
     assertThat(response.getDatasetAlleleResponses(), nullValue());
@@ -289,7 +298,7 @@ public class ElixirBeaconServiceTest {
 
   @Test
   public void queryControlledDatasetByUnauthenticatedUser() throws Exception {
-    BeaconAlleleResponse response = elixirBeaconService.queryBeacon(Arrays.asList("EGAD00000000002"), "A", null, "X", 1, "GRCh37");
+    BeaconAlleleResponse response = elixirBeaconService.queryBeacon(Arrays.asList("EGAD00000000002"), "A", null, "X", 1, null, "GRCh37");
     
     assertThat(response.getError(), notNullValue());
     assertThat(response.getError().getErrorCode(), equalTo(HttpStatus.UNAUTHORIZED.value()));

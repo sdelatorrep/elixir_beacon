@@ -83,5 +83,7 @@ public class BeaconConstants {
   public static final String ACCESS_TYPE = "accessType";
   
   public static final String AUTHORIZED = "authorized";
+  
+  public static final String SIZE = "size";
           
 }

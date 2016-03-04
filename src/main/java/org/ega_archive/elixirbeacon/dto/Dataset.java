@@ -25,9 +25,9 @@ public class Dataset {
   private String description;
   
   // Assembly identifier, e.g. `GRCh37`
-  private String assembly;
+  private String assemblyId;
   
-  // Data use conditions for this dataset based on consent codes
+  // Data use conditions for this dataset
   private List<DataUseCondition> dataUseConditions;
   
   // The time the dataset was created in the beacon in ms from the epoch

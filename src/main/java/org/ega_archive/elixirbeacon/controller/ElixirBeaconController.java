@@ -30,30 +30,18 @@ public class ElixirBeaconController {
     return elixirBeaconService.listDatasets(CommonQueryHelper.parseQuery(params, sort), null);
   }
   
-  @RequestMapping(value = {"/query"}, method = {RequestMethod.GET, RequestMethod.POST})
+  @RequestMapping(value = {"/query", "/alleles"}, method = {RequestMethod.GET, RequestMethod.POST})
   public BeaconAlleleResponse queryBeacon(
       @RequestParam(value = ParamName.BEACON_DATASET_IDS, required = false) List<String> datasetStableIds, 
       @RequestParam(value = ParamName.BEACON_ALTERNATE_BASES, required = false) String allele, 
       @RequestParam(value = ParamName.BEACON_REFERENCE_BASES, required = false) String referenceBases, 
       @RequestParam(value = ParamName.BEACON_CHROMOSOME, required = false) String chromosome, 
       @RequestParam(value = ParamName.BEACON_POSITION, required = false) Integer position,
+      @RequestParam(value = ParamName.BEACON_START, required = false) Integer start,
       @RequestParam(value = ParamName.BEACON_REFERENCE_GENOME, required = false) String referenceGenome) {
     
     return elixirBeaconService.queryBeacon(datasetStableIds, allele, referenceBases, chromosome,
-        position, referenceGenome);
-  }
-  
-  @RequestMapping(value = "/alleles", method = {RequestMethod.GET, RequestMethod.POST})
-  public BeaconAlleleResponse queryBeaconAlternative(
-      @RequestParam(value = ParamName.BEACON_DATASET_IDS, required = false) List<String> datasetStableIds, 
-      @RequestParam(value = ParamName.BEACON_ALT_BASES, required = false) String alternateBases,
-      @RequestParam(value = ParamName.BEACON_REFERENCE_BASES, required = false) String referenceBases, 
-      @RequestParam(value = ParamName.BEACON_CHROM, required = false) String chromosome, 
-      @RequestParam(value = ParamName.BEACON_POS, required = false) Integer position,
-      @RequestParam(value = ParamName.BEACON_REFERENCE_GENOME, required = false) String referenceGenome) {
-    
-    return elixirBeaconService.queryBeacon(datasetStableIds, alternateBases, referenceBases,
-        chromosome, position, referenceGenome);
+        position, start, referenceGenome);
   }
   
 }

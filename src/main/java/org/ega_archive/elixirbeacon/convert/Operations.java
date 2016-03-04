@@ -27,13 +27,12 @@ public class Operations {
     Dataset beaconDataset = new Dataset();
     beaconDataset.setId(dataset.getId());
     beaconDataset.setDescription(dataset.getDescription());
-//    beaconDataset.setSize(BeaconDatasetSize.builder().variants(dataset.getSize()).build());
     beaconDataset.setVariantCount(new Long(dataset.getSize()));
     Map<String, String> info = new HashMap<String, String>();
     info.put(BeaconConstants.ACCESS_TYPE, DatasetAccessType.parse(dataset.getAccessType()).getType());
     info.put(BeaconConstants.AUTHORIZED, Boolean.toString(authorized));
     beaconDataset.setInfo(info);
-    beaconDataset.setAssembly(dataset.getReferenceGenome());
+    beaconDataset.setAssemblyId(dataset.getReferenceGenome());
     
     // Data Use Conditions
     if(ccDataUseConditions != null && !ccDataUseConditions.isEmpty()) {
