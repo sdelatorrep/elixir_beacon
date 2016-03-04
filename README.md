@@ -125,21 +125,20 @@ By default, the application uses two PostgreSQL databases with the name **elixir
 datasource.elixirbeacon.url=jdbc:postgresql://hostname:port/elixir_beacon_dev
 datasource.elixirbeacon.username=the_username
 datasource.elixirbeacon.password=the_password
-datasource.elixirbeacon.driverClassName=org.postgresql.Driver
-spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy
-spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.properties.hibernate.connection.charSet = UTF-8
 ```
 1. specify the type of the database (postgresql), the hostname, port and finally the database name.
     * I. e. if you use MySQL: jdbc:mysql
 2. username that will be used to connect to the database.
 3. password of that username.
-4. driver class name 
+```INI
+datasource.elixirbeacon.driverClassName=org.postgresql.Driver
+...
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+```
+1. driver class name 
     * if you use MySQL: com.mysql.jdbc.Driver
-5. Nothing to change.
-6. hibernate dialect.
+2. hibernate dialect.
     * if you use MySQL: org.hibernate.dialect.MySQLDialect
-7. Nothing to change.
  
 If you use a different DB than Postgres, you must add the corresponding library to the **/lib** folder inside the JAR (you don't need to recompile) or add the dependency to the pom.xml so maven can download the library (this will force you to compile).
 
