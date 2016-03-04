@@ -6,18 +6,18 @@
 
 #Configure databases
 ##Create databases
-Create a DB with the name you want (default name is **elixir_beacon_dev**):
+1. Create a DB with the name you want (default name is **elixir_beacon_dev**):
 ```
 createdb database_name -h server_host -p server_port -U super_user
 ```
-Log in the DB and grant privileges to a normal user (that is, not a super user):
+2. Log in the DB and grant privileges to a normal user (that is, not a super user):
 ```
 psql database_name -U super_user
 ```
 ```sql
 GRANT ALL PRIVILEGES ON DATABASE database_name TO normal_user;
 ```
-Load the schema into the DB:
+3. Load the schema into the DB:
 ```sql
 CREATE TABLE beacon_dataset_table (
 	id character varying(50) NOT NULL PRIMARY KEY,
@@ -255,7 +255,7 @@ psql -h server_host -p server_port -d database_name -U user_name < schema_dump.s
 ```
 You can skip step 2) and load the schema using a super user in step 3) and after that granting privileges to a normal user (this user will be used by the application to connect to the database).
 
-Create a second database (i. e. **elixir_beacon_testing**) that will be used in the tests.
+4. Create a second database (i. e. **elixir_beacon_testing**) that will be used to execute the tests.
 
 ##Load the data
 Use this script to parse a VCF input file:
@@ -265,18 +265,22 @@ grep -v "#"| cut -f1,2,4,5,7 | sort | uniq | awk -v ds=$1 '
 { if ( (length($3) == 1 && length($4) == 1) && ($5 == "PASS" || $5 == ".")) print ds";"$1";"$2";"$4}
 ' > file.SNPs
 ```
-Run this script executing:
+1. Copy the content into a file called vcf_parser.sh and give it executable rights:
+```
+chmod +x vcf_parser.sh
+```
+2. Run this script executing:
 ```
 ./vcf_parser.sh dataset_id < file.vcf
 ```
 This script will generate an output file called file.SNPs.
 
-Load the dataset information into **beacon_dataset_table**.
+3. Load the dataset information into **beacon_dataset_table**.
 ```sql
 INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
     VALUES ('dataset_id', 'dataset_description', 'i. e. PUBLIC', 'i. e. grch37', 123456);
 ```
-Load the generated file into **beacon_data_table**:
+4. Load the generated file into **beacon_data_table**:
 ```
 cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
 ```
