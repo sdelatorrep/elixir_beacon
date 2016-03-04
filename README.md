@@ -31,7 +31,7 @@ That script will create the schema and also load some essential data for data us
 
 If you use a super user to create the schema then you will need to grant access to the "normal" user that will be used by the application (that user we created in the second step):
 ```sql
-GRAN ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO USER microaccounts_dev;
+GRAN ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO USER user_name;
 ```
 
 ##Load the data
