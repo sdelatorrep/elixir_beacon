@@ -191,7 +191,7 @@ They are defined in the **org.ega_archive.elixirbeacon.ElixirBeaconController** 
 ##/beacon/info
 Returns the information about this beacon: its Id, name and description, the API version it is compliant with, the URL where you can access this beacon, etc.
 
-https://egatest.crg.eu/elixir_demo_beacon/info
+http://localhost:9075/elixirbeacon/v03/beacon/info
 ```json
 {
   "id" : "elixir-demo-beacon",
@@ -309,8 +309,19 @@ The 3 examples that appear in field sampleAlleleRequests can be customized by mo
 
 ##/beacon/query
 To actually ask the beacon for questions like "do you have any genomes with an 'A' at position 100,735 on chromosome 3?" And the answer will be yes or no.
+Parameters:
+* assemblyId
+    * I. e. GRCh37
+* referenceName
+    * 1-22, X, Y, MT
+* position
+* alternate (optional)
+    * Regular expression: [ACTG]+
+    * I. e. alternate=A, alternate=CG, etc.
+* datasetIds (optional)
+    * I. e. ?datasetIds=some-id&datasetIds=another-id
 
-https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37
+http://localhost:9075/elixirbeacon/v03/beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37
 ```json
 {
   "beaconId" : "elixir-demo-beacon",
@@ -329,7 +340,7 @@ https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=1798329
 ```
 Or you can ask for the same information in an specific dataset:
 
-https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37&datasetIds=EGAD00001000740
+http://localhost:9075/elixirbeacon/v03/beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37&datasetIds=EGAD00001000740
 ```json
 {
   "beaconId" : "elixir-demo-beacon",
