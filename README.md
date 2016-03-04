@@ -6,18 +6,20 @@
 
 #Configure databases
 ##Create databases
-1. Create a DB with the name you want (default name is **elixir_beacon_dev**):
+* Create a DB with the name you want (default name is **elixir_beacon_dev**):
 ```
 createdb database_name -h server_host -p server_port -U super_user
 ```
-2. Log in the DB and grant privileges to a normal user (that is, not a super user):
+* Log in the DB and grant privileges to a normal user (that is, not a super user):
 ```
 psql database_name -U super_user
 ```
 ```sql
 GRANT ALL PRIVILEGES ON DATABASE database_name TO normal_user;
 ```
-3. Load the schema into the DB:
+You can skip this step and load the schema using a super user in the next step and after that, granting privileges to a normal user (this user will be used by the application to connect to the database).
+
+* Load the schema into the DB:
 ```sql
 CREATE TABLE beacon_dataset_table (
 	id character varying(50) NOT NULL PRIMARY KEY,
@@ -253,9 +255,8 @@ You can also copy these lines into a file to load it as follows:
 ```
 psql -h server_host -p server_port -d database_name -U user_name < schema_dump.sql
 ```
-You can skip step 2) and load the schema using a super user in step 3) and after that granting privileges to a normal user (this user will be used by the application to connect to the database).
 
-4. Create a second database (i. e. **elixir_beacon_testing**) that will be used to execute the tests.
+* Create a second database (i. e. **elixir_beacon_testing**) that will be used to execute the tests.
 
 ##Load the data
 Use this script to parse a VCF input file:
