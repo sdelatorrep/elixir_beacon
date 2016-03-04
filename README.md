@@ -65,6 +65,7 @@ git clone https://github.com/elixirhub/human-data-beacon.git
 ```
 Then download each of the projects (submodules in git terminology):
 ```
+cd human-data-beacon
 cd elixir_beacon
 git submodule init
 git submodule update
