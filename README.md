@@ -352,9 +352,9 @@ spring.jpa.properties.hibernate.connection.charSet = UTF-8
 
 Do the same changes in **/src/test/resources/application-{profile}.properties**. By default, the database there is called *elixir_beacon_testing*.
 
-If you use a different DB than Postgres, you must add the corresponding library to the **/lib** folder inside the JAR or add the dependency to the pom.xml so maven can download the library (this will allow you to compile the code if you haven't done this yet).
+If you use a different DB than Postgres, you must add the corresponding library to the **/lib** folder inside the JAR (you don't need to recompile) or add the dependency to the pom.xml so maven can download the library (this will force you to compile).
 
-You can also change the sample requests that appear in the **/info** endpoint (see [Using the application](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#using-the-application)) by modifying some values in **application-{profile}.yml** file:
+You can also change the sample requests (*sampleAlleleRequests* field in the JSON) that are shown in the **/info** endpoint (see [Using the application](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#using-the-application)) by modifying some values in **application-{profile}.yml** file:
 ```yml
 #sample #1
 querySamples:
