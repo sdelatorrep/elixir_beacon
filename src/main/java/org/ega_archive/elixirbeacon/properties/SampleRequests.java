@@ -17,13 +17,13 @@ import org.springframework.stereotype.Component;
 public class SampleRequests {
 
   @NotNull
-  private String referenceSet1;
+  private String assemblyId1;
   
   @NotNull
-  private String referenceSet2;
+  private String assemblyId2;
   
   @NotNull
-  private String referenceSet3;
+  private String assemblyId3;
   
   @NotNull
   private Integer position1;
@@ -35,13 +35,13 @@ public class SampleRequests {
   private Integer position3;
   
   @NotNull
-  private String chromosome1;
+  private String referenceName1;
   
   @NotNull
-  private String chromosome2;
+  private String referenceName2;
   
   @NotNull
-  private String chromosome3;
+  private String referenceName3;
   
   private List<String> datasetIds1;
   

@@ -98,23 +98,23 @@ public class ElixirBeaconServiceImpl implements ElixirBeaconService {
   private List<BeaconAlleleRequest> getSampleAlleleRequests() {
     List<BeaconAlleleRequest> sampleAlleleRequests = new ArrayList<BeaconAlleleRequest>();
     sampleAlleleRequests.add(BeaconAlleleRequest.builder()
-        .assemblyId(sampleRequests.getReferenceSet1())
+        .assemblyId(sampleRequests.getAssemblyId1())
         .position(sampleRequests.getPosition1())
-        .chromosome(sampleRequests.getChromosome1())
+        .chromosome(sampleRequests.getReferenceName1())
         .alternateBases(StringUtils.isBlank(sampleRequests.getAlternateBases1()) ? null : sampleRequests.getAlternateBases1())
         .datasetIds(sampleRequests.getDatasetIds1().isEmpty() ? null : sampleRequests.getDatasetIds1())
         .build());
     sampleAlleleRequests.add(BeaconAlleleRequest.builder()
-        .assemblyId(sampleRequests.getReferenceSet2())
+        .assemblyId(sampleRequests.getAssemblyId2())
         .position(sampleRequests.getPosition2())
-        .chromosome(sampleRequests.getChromosome2())
+        .chromosome(sampleRequests.getReferenceName2())
         .alternateBases(StringUtils.isBlank(sampleRequests.getAlternateBases2()) ? null : sampleRequests.getAlternateBases2())
         .datasetIds(sampleRequests.getDatasetIds2().isEmpty() ? null : sampleRequests.getDatasetIds2())
         .build());
     sampleAlleleRequests.add(BeaconAlleleRequest.builder()
-        .assemblyId(sampleRequests.getReferenceSet3())
+        .assemblyId(sampleRequests.getAssemblyId3())
         .position(sampleRequests.getPosition3())
-        .chromosome(sampleRequests.getChromosome3())
+        .chromosome(sampleRequests.getReferenceName3())
         .alternateBases(StringUtils.isBlank(sampleRequests.getAlternateBases3()) ? null : sampleRequests.getAlternateBases3())
         .datasetIds(sampleRequests.getDatasetIds3().isEmpty() ? null : sampleRequests.getDatasetIds3())
         .build());
