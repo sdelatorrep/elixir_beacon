@@ -37,14 +37,7 @@ GRAN ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO USER user_name;
 Remember to run these lines in both databases.
 
 ##Load the data
-Use this script to parse a VCF input file:
-```bash
-#!/bin/bash
-grep -v "#"| cut -f1,2,4,5,7 | sort | uniq | awk -v ds=$1 '
-{ if ( (length($3) == 1 && length($4) == 1) && ($5 == "PASS" || $5 == ".")) print ds";"$1";"$2";"$4}
-' > file.SNPs
-```
-* Copy the content into a file called vcf_parser.sh and give it executable rights:
+* Download the script to parse VCF files [here](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/vcf_parser.sh) and give it executable rights:
 ```
 chmod +x vcf_parser.sh
 ```
@@ -52,14 +45,14 @@ chmod +x vcf_parser.sh
 ```
 ./vcf_parser.sh dataset_id < file.vcf
 ```
-This script will generate an output file called file.SNPs.
+This script will generate an output file called dataset_id.SNPs.
+It will also output the number of variants extracted from the VCF. This value is the "size" in the next step.
 
 * Load the dataset information into **beacon_dataset_table**.
 ```sql
 INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
     VALUES ('dataset_id', 'dataset_description', 'i. e. PUBLIC', 'i. e. grch37', 123456);
 ```
-The size is the number of rows inserted in beacon_data_table for this dataset.
 
 * Load the generated file into **beacon_data_table**:
 ```
@@ -126,20 +119,18 @@ datasource.elixirbeacon.url=jdbc:postgresql://hostname:port/elixir_beacon_dev
 datasource.elixirbeacon.username=the_username
 datasource.elixirbeacon.password=the_password
 datasource.elixirbeacon.driverClassName=org.postgresql.Driver
-spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy
-spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.properties.hibernate.connection.charSet = UTF-8
 ```
-1. specify the type of the database (postgresql), the hostname, port and finally the database name.
+1. Specify the type of the database (postgresql), the hostname, port and finally the database name.
     * I. e. if you use MySQL: jdbc:mysql
-2. username that will be used to connect to the database.
-3. password of that username.
-4. driver class name 
+2. Username that will be used to connect to the database.
+3. Password of that username.
+4. Driver class name 
     * if you use MySQL: com.mysql.jdbc.Driver
-5. Nothing to change.
-6. hibernate dialect.
+```INI
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+```
+1. Hibernate dialect.
     * if you use MySQL: org.hibernate.dialect.MySQLDialect
-7. Nothing to change.
  
 If you use a different DB than Postgres, you must add the corresponding library to the **/lib** folder inside the JAR (you don't need to recompile) or add the dependency to the pom.xml so maven can download the library (this will force you to compile).
 
@@ -183,15 +174,15 @@ If compilation and test execution are successful, a JAR file will be generated i
 ##Deploy the JAR
 To deploy the JAR run:
  ```
-java -jar elixir-beacon-0.3.jar --spring.profiles.active=test
+java -jar elixir-beacon-0.3.jar --spring.profiles.active=dev
  ```
 It will generate a log in the file **application.log** located in the same folder where the JAR is located.
 
-This argument <code>--spring.profiles.active=test</code> specifies the profile to be used. By default, there are 2 profiles: **dev** and **test**. Each profile will use its own set of properties files. 
+This argument <code>--spring.profiles.active=dev</code> specifies the profile to be used. By default, there are 2 profiles: **dev** and **test**. Each profile will use its own set of properties files. 
 
-I. e. **test** profile will use:
-* application-test.properties
-* application-test.yml
+I. e. **dev** profile will use:
+* application-dev.properties
+* application-dev.yml
 
 Using the default configuration, the application will be available at: <localhost:9075/elixirbeacon/v03/>
 
@@ -476,5 +467,5 @@ You have two options:
             * Then create a /lib folder and put the elixir-beacon-custom-version.jar jar in that folder
             * After that you can run the program executing:
             ```
-            java -Dloader.path=lib/ -Dspring.profiles.active=test -jar elixir-beacon-0.3.jar
+            java -Dloader.path=lib/ -Dspring.profiles.active=dev -jar elixir-beacon-0.3.jar
             ```
