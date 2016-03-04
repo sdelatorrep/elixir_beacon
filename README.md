@@ -63,7 +63,7 @@ Clone the projects **elixir_beacon** (current one) and **elixir_core** located a
 ```
 git clone https://github.com/elixirhub/human-data-beacon.git
 ```
-Then clone each of the projects (submodules in git therminology):
+Then clone each of the projects (submodules in git terminology):
 ```
 cd elixir_beacon
 git submodule init
@@ -279,7 +279,9 @@ I. e. **test** profile will use:
 Using the default configuration, the application will be available at: **localhost:9075/elixirbeacon/v03/**
 
 ##Run integration tests
-We use JMeter to run this kind of tests. We have an artifact called **elixir-beacon-service-tests**. To get the code execute a git pull from the elixir_beacon_tests project at [Elixir's Human Data Beacon repository](https://github.com/elixirhub/human-data-beacon).
+We use JMeter to run this kind of tests. We have an artifact called **elixir-beacon-service-tests**. 
+
+To get the code download the project elixir_beacon_tests (you should already have the folder created but empty, follow [these steps](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#download-the-project) to download the content).
 
 Once you have downloaded this project you can just run:
 ```
