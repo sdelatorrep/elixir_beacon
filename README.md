@@ -387,7 +387,7 @@ To execute only the tests run:
 ```
 mvn test
 ```
-NOTE: To execute the tests you should have a database different than the main one (see the previous section).
+NOTE: To execute the tests you should have a different database than the main one (see the previous section).
 
 If compilation and test execution is successful, a JAR file will be generated in the folder **/target** with the name **elixir-beacon-0.3.jar**
 
