@@ -29,6 +29,11 @@ psql -h server_host -p server_port -d database_name -U user_name < elixir_beacon
 ```
 That script will create the schema and also load some essential data for data use conditions.
 
+If you use a super user to create the schema then you will need to grant access to the "normal" user that will be used by the application (that user we created in the second step):
+```sql
+GRAN ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO USER microaccounts_dev;
+```
+
 ##Load the data
 Use this script to parse a VCF input file:
 ```bash
