@@ -304,12 +304,12 @@ For other configurations please add a profile in pom.xml file. You will see the 
 
 #Using the application
 The application publishes two endpoints:
-* /info
-* /query
+* /beacon/info
+* /beacon/query
 
 They are defined in the **org.ega_archive.elixirbeacon.ElixirBeaconController** class.
 
-##/info
+##/beacon/info
 Returns the information about this beacon: its Id, name and description, the API version it is compliant with, the URL where you can access this beacon, etc.
 
 https://egatest.crg.eu/elixir_demo_beacon/info
@@ -428,7 +428,7 @@ https://egatest.crg.eu/elixir_demo_beacon/info
 ```
 The 3 examples that appear in field sampleAlleleRequests can be customized by modifying **application-{profile}.yml** as explained in [Configure application](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#configure-application).
 
-##/query
+##/beacon/query
 To actually ask the beacon for questions like "do you have any genomes with an 'A' at position 100,735 on chromosome 3?" And the answer will be yes or no.
 
 https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=179832996&assemblyId=GRCh37
