@@ -10,7 +10,11 @@
 ```
 createdb database_name -h server_host -p server_port -U super_user
 ```
-* Log in the DB and grant privileges to a normal user (that is, not a super user):
+* Create a user that will be used by the application to connect to the database just created:
+```
+createuser user_name
+```
+* Log in the DB and grant privileges to a normal user (that is, not a super user), i. e. the user just created in the previous step:
 ```
 psql database_name -U super_user
 ```
