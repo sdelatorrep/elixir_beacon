@@ -389,7 +389,7 @@ mvn test
 ```
 NOTE: To execute the tests you should have a different database than the main one (see [Create databases](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#create-databases)).
 
-If compilation and test execution is successful, a JAR file will be generated in the folder **/target** with the name **elixir-beacon-0.3.jar**
+If compilation and test execution are successful, a JAR file will be generated in the folder **/target** with the name **elixir-beacon-0.3.jar**
 
 ##Extend/Change functionality
 You have two options:
