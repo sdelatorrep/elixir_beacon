@@ -181,15 +181,15 @@ If compilation and test execution are successful, a JAR file will be generated i
 ##Deploy the JAR
 To deploy the JAR run:
  ```
-java -jar elixir-beacon-0.3.jar --spring.profiles.active=test
+java -jar elixir-beacon-0.3.jar --spring.profiles.active=dev
  ```
 It will generate a log in the file **application.log** located in the same folder where the JAR is located.
 
-This argument <code>--spring.profiles.active=test</code> specifies the profile to be used. By default, there are 2 profiles: **dev** and **test**. Each profile will use its own set of properties files. 
+This argument <code>--spring.profiles.active=dev</code> specifies the profile to be used. By default, there are 2 profiles: **dev** and **test**. Each profile will use its own set of properties files. 
 
-I. e. **test** profile will use:
-* application-test.properties
-* application-test.yml
+I. e. **dev** profile will use:
+* application-dev.properties
+* application-dev.yml
 
 Using the default configuration, the application will be available at: <localhost:9075/elixirbeacon/v03/>
 
@@ -474,5 +474,5 @@ You have two options:
             * Then create a /lib folder and put the elixir-beacon-custom-version.jar jar in that folder
             * After that you can run the program executing:
             ```
-            java -Dloader.path=lib/ -Dspring.profiles.active=test -jar elixir-beacon-0.3.jar
+            java -Dloader.path=lib/ -Dspring.profiles.active=dev -jar elixir-beacon-0.3.jar
             ```
