@@ -23,12 +23,11 @@ GRANT ALL PRIVILEGES ON DATABASE database_name TO normal_user;
 ```
 You can skip this step and load the schema using a super user in the next step and after that, granting privileges to a normal user (this user will be used by the application to connect to the database).
 
-* Load the [schema](https://github.com/sdelatorrep/elixir_beacon/blob/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql) into **both** databases. That script will create the schema and also load some essential data for data use conditions.
-
-You can also copy these lines into a file to load it as follows:
+* Download the schema script from [here](https://github.com/sdelatorrep/elixir_beacon/blob/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql) and run it into **both** databases: 
 ```
-psql -h server_host -p server_port -d database_name -U user_name < schema_dump.sql
+psql -h server_host -p server_port -d database_name -U user_name < elixir_beacon_db_schema.sql
 ```
+That script will create the schema and also load some essential data for data use conditions.
 
 ##Load the data
 Use this script to parse a VCF input file:
