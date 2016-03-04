@@ -134,30 +134,8 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialec
  
 If you use a different DB than Postgres, you must add the corresponding library to the **/lib** folder inside the JAR (you don't need to recompile) or add the dependency to the pom.xml so maven can download the library (this will force you to compile).
 
-You can also change the sample requests (*sampleAlleleRequests* field in the JSON) that are shown in the **/info** endpoint (see [Using the application](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#using-the-application)) by modifying some values in **application-{profile}.yml** file:
-```yml
-#sample #1
-querySamples:
-  reference-set-1: GRCh37
-  position-1: 6689
-  chromosome-1: 17
-  alternate-bases-1:
-  dataset-ids-1:
-#sample #2
-  reference-set-2: GRCh37
-  position-2: 1040026
-  chromosome-2: 1
-  alternate-bases-2:
-  dataset-ids-2: EGAD00001000740,EGAD00001000741
-#sample #3
-  reference-set-3: GRCh37
-  position-3: 1040026
-  chromosome-3: 1
-  alternate-bases-3: C
-  dataset-ids-3: EGAD00001000740
-```
 ##Compile and test the code
-To compile the code run:
+To compile the code run the following command within the project folder:
 ```
 mvn clean compile package -Dspring.profiles.active="dev"
 ```
@@ -172,7 +150,7 @@ NOTE: To execute the tests you should use a different database than the main one
 If compilation and test execution are successful, a JAR file will be generated in the folder **/target** with the name **elixir-beacon-0.3.jar**
 
 ##Deploy the JAR
-To deploy the JAR run:
+To deploy the JAR run run the following command within the /elixir_beacon/target folder:
  ```
 java -jar elixir-beacon-0.3.jar --spring.profiles.active=dev
  ```
