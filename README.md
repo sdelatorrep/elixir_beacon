@@ -63,7 +63,7 @@ Clone the projects **elixir_beacon** (current one) and **elixir_core** located a
 ```
 git clone https://github.com/elixirhub/human-data-beacon.git
 ```
-Then clone each of the projects (submodules in git terminology):
+Then download each of the projects (submodules in git terminology):
 ```
 cd elixir_beacon
 git submodule init
