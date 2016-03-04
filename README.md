@@ -180,96 +180,6 @@ NOTE: To execute the tests you should have a different database than the main on
 
 If compilation and test execution are successful, a JAR file will be generated in the folder **/target** with the name **elixir-beacon-0.3.jar**
 
-##Extend/Change functionality
-You have two options:
-
-1. Editing the source code.
-    * If you want to add new functionalities (i. e. new endpoints).
-2. Changing the implementation class.
-    * If you want to change the way something is done (i. e. you want to modify the query, to check some requirements in the parameters, etc.)
-    * You can write your own implementation for the interface **org.ega_archive.elixirbeacon.ElixirBeaconService**
-    * This application uses [Spring framework](http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/htmlsingle/). Specifically we use [Spring boot](https://docs.spring.io/spring-boot/docs/1.1.x/reference/htmlsingle/).
-    * The following steps will allow you to make a custom implementation:
-        * Create a new maven project:
-        ```xml
-        <?xml version="1.0" encoding="UTF-8"?>
-        <project xmlns="http://maven.apache.org/POM/4.0.0"
-                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-            <modelVersion>4.0.0</modelVersion>
-          
-            <groupId>org.ega_archive</groupId>
-            <artifactId>elixir-beacon-custom</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <packaging>jar</packaging>
-          
-            <name>elixir-beacon-custom</name>
-            <description>elixir-beacon-custom</description>
-          
-            <dependencies>
-                <dependency>
-                    <groupId>org.ega_archive</groupId>
-                    <artifactId>elixir-beacon</artifactId>
-                    <version>put version here, i.e: 0.0.1-SNAPSHOT</version>
-                </dependency>
-            </dependencies>
-        </project>
-        ```
-        * After That create the package **org.ega_archive.custom.elixirbeacon.** (by default, our app will scan org.ega_archive.custom.elixirbeacon package to try to find candidates for our services) If you want to use a different package name, you must cusomize your application properties name and add the property:
-        ```INI
-        custom.package.scan=org.my.custom
-        ```
-        * Inside that folder create a services package and a write your custom implementation 
-        ```java
-        package org.ega_archive.elixirbeacon.service;
-        
-        import org.ega_archive.elixirbeacon.dto.Beacon;
-        import org.ega_archive.elixirbeacon.dto.BeaconAlleleResponse;
-        import org.ega_archive.elixircore.helper.CommonQuery;
-        import org.springframework.context.annotation.Primary;
-        import org.springframework.stereotype.Component;
-         
-        import java.util.List;
-         
-        @Primary //This will make that this implementation will be used instead of the default one
-        @Component
-        public class CustomService implements ElixirBeaconService {
-         
-          public Beacon listDatasets(CommonQuery commonQuery, String referenceGenome) {
-            //Write here your custom code
-            return null;
-          }
-         
-          public BeaconAlleleResponse queryBeacon(List<String> datasetStableIds, String alternateBases, String referenceBases, String chromosome, Integer position, String referenceGenome) {
-            //Write here your custom code
-            return null;
-          }
-         
-          public List<String> checkParams(BeaconAlleleResponse result, List<String> datasetStableIds, String alternateBases, String referenceBases, String chromosome, Integer position, String referenceGenome) {
-            //Write here your custom code
-            return null;
-          }
-        }
-        ```
-        * Compile your code:
-        ```
-        mvn clean compile jar:jar
-        ```
-        This will generate a **elixir-beacon-custom-version.jar**.
-        
-        If you get an error of the depency not found, it it because you don't have a repo with the dependency artifact. In this case, you can go to the elixir-beacon aritfact and execute:
-        ```
-        mvn install
-        ```
-        This will install the artifact in your local repo. After that try to compile again your custom code.
-        * Execute the program with your code: 
-            * First create an empty folder an copy there the original elixir jar (elixir-beacon-0.3.jar)
-            * Then create a /lib folder and put the elixir-beacon-custom-version.jar jar in that folder
-            * After that you can run the program executing:
-            ```
-            java -Dloader.path=lib/ -Dspring.profiles.active=test -jar elixir-beacon-0.3.jar
-            ```
-
 ##Deploy the JAR
 To deploy the JAR run:
  ```
@@ -478,3 +388,93 @@ https://egatest.crg.eu/elixir_demo_beacon/query?referenceName=1&position=1798329
   } ]
 }
 ```
+
+#Extend/Change functionality
+You have two options:
+
+1. Editing the source code.
+    * If you want to add new functionalities (i. e. new endpoints).
+2. Changing the implementation class.
+    * If you want to change the way something is done (i. e. you want to modify the query, to check some requirements in the parameters, etc.)
+    * You can write your own implementation for the interface **org.ega_archive.elixirbeacon.ElixirBeaconService**
+    * This application uses [Spring framework](http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/htmlsingle/). Specifically we use [Spring boot](https://docs.spring.io/spring-boot/docs/1.1.x/reference/htmlsingle/).
+    * The following steps will allow you to make a custom implementation:
+        * Create a new maven project:
+        ```xml
+        <?xml version="1.0" encoding="UTF-8"?>
+        <project xmlns="http://maven.apache.org/POM/4.0.0"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+          
+            <groupId>org.ega_archive</groupId>
+            <artifactId>elixir-beacon-custom</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <packaging>jar</packaging>
+          
+            <name>elixir-beacon-custom</name>
+            <description>elixir-beacon-custom</description>
+          
+            <dependencies>
+                <dependency>
+                    <groupId>org.ega_archive</groupId>
+                    <artifactId>elixir-beacon</artifactId>
+                    <version>put version here, i.e: 0.0.1-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </project>
+        ```
+        * After That create the package **org.ega_archive.custom.elixirbeacon.** (by default, our app will scan org.ega_archive.custom.elixirbeacon package to try to find candidates for our services) If you want to use a different package name, you must cusomize your application properties name and add the property:
+        ```INI
+        custom.package.scan=org.my.custom
+        ```
+        * Inside that folder create a services package and a write your custom implementation 
+        ```java
+        package org.ega_archive.elixirbeacon.service;
+        
+        import org.ega_archive.elixirbeacon.dto.Beacon;
+        import org.ega_archive.elixirbeacon.dto.BeaconAlleleResponse;
+        import org.ega_archive.elixircore.helper.CommonQuery;
+        import org.springframework.context.annotation.Primary;
+        import org.springframework.stereotype.Component;
+         
+        import java.util.List;
+         
+        @Primary //This will make that this implementation will be used instead of the default one
+        @Component
+        public class CustomService implements ElixirBeaconService {
+         
+          public Beacon listDatasets(CommonQuery commonQuery, String referenceGenome) {
+            //Write here your custom code
+            return null;
+          }
+         
+          public BeaconAlleleResponse queryBeacon(List<String> datasetStableIds, String alternateBases, String referenceBases, String chromosome, Integer position, String referenceGenome) {
+            //Write here your custom code
+            return null;
+          }
+         
+          public List<String> checkParams(BeaconAlleleResponse result, List<String> datasetStableIds, String alternateBases, String referenceBases, String chromosome, Integer position, String referenceGenome) {
+            //Write here your custom code
+            return null;
+          }
+        }
+        ```
+        * Compile your code:
+        ```
+        mvn clean compile jar:jar
+        ```
+        This will generate a **elixir-beacon-custom-version.jar**.
+        
+        If you get an error of the depency not found, it it because you don't have a repo with the dependency artifact. In this case, you can go to the elixir-beacon aritfact and execute:
+        ```
+        mvn install
+        ```
+        This will install the artifact in your local repo. After that try to compile again your custom code.
+        * Execute the program with your code: 
+            * First create an empty folder an copy there the original elixir jar (elixir-beacon-0.3.jar)
+            * Then create a /lib folder and put the elixir-beacon-custom-version.jar jar in that folder
+            * After that you can run the program executing:
+            ```
+            java -Dloader.path=lib/ -Dspring.profiles.active=test -jar elixir-beacon-0.3.jar
+            ```
