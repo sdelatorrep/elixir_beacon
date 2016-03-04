@@ -23,7 +23,7 @@ GRANT ALL PRIVILEGES ON DATABASE database_name TO normal_user;
 ```
 You can skip this step and load the schema using a super user in the next step and after that, granting privileges to a normal user (this user will be used by the application to connect to the database).
 
-* Download the schema script from [here](https://github.com/sdelatorrep/elixir_beacon/blob/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql) and run it in **both** databases: 
+* Download the schema script from [here](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql) and run it in **both** databases: 
 ```
 psql -h server_host -p server_port -d database_name -U user_name < elixir_beacon_db_schema.sql
 ```
@@ -31,8 +31,10 @@ That script will create the schema and also load some essential data for data us
 
 If you use a super user to create the schema then you will need to grant access to the "normal" user that will be used by the application (that user we created in the second step):
 ```sql
+GRAN ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO USER user_name;
 GRAN ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO USER user_name;
 ```
+Remember to run these lines in both databases.
 
 ##Load the data
 Use this script to parse a VCF input file:
@@ -57,6 +59,8 @@ This script will generate an output file called file.SNPs.
 INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
     VALUES ('dataset_id', 'dataset_description', 'i. e. PUBLIC', 'i. e. grch37', 123456);
 ```
+The size is the number of rows inserted in beacon_data_table for this dataset.
+
 * Load the generated file into **beacon_data_table**:
 ```
 cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
