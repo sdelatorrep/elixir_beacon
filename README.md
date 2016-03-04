@@ -59,8 +59,19 @@ cat file.SNPs | psql -h server_host -p port -U user_name -c "COPY beacon_data_ta
 
 #Managing the code
 ##Download the project
-Execute a git pull from the projects **elixir_beacon** (current one) and **elixir_core** located at the [Elixir' repository](https://github.com/elixirhub/human-data-beacon).
+Clone the projects **elixir_beacon** (current one) and **elixir_core** located at the [Elixir' repository](https://github.com/elixirhub/human-data-beacon).
+```
+git clone https://github.com/elixirhub/human-data-beacon.git
+```
+Then clone each of the projects (submodules in git therminology):
+```
+cd elixir_beacon
+git submodule init
+git submodule update
+```
+Do the same for the other project.
 
+##Structure
 The project has the following structure:
 * /src/main/java
     * Java files (.java).
