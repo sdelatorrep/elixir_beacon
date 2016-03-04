@@ -103,7 +103,7 @@ mvn install
 Now this dependency will be found when compiling the main project, elixir_beacon.
 
 ##Configure application
-The key file is **/src/main/resources/application-{profile}.properties** (see [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
+The key file are **/src/main/resources/application-{profile}.properties** and **/src/test/resources/application-{profile}.properties** (see [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
 
 By default, the application is deployed at port **9075** and the context is **/elixirbeacon/v03/**. You can change this by modifying the following lines of the properties file:
 ```INI
@@ -132,9 +132,6 @@ spring.jpa.properties.hibernate.connection.charSet = UTF-8
     * if you use MySQL: org.hibernate.dialect.MySQLDialect
 7. Nothing to change.
  
-
-Do the same changes in **/src/test/resources/application-{profile}.properties**. By default, the database there is called *elixir_beacon_testing*.
-
 If you use a different DB than Postgres, you must add the corresponding library to the **/lib** folder inside the JAR (you don't need to recompile) or add the dependency to the pom.xml so maven can download the library (this will force you to compile).
 
 You can also change the sample requests (*sampleAlleleRequests* field in the JSON) that are shown in the **/info** endpoint (see [Using the application](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#using-the-application)) by modifying some values in **application-{profile}.yml** file:
