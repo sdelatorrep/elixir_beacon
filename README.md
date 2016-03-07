@@ -89,7 +89,22 @@ git submodule update
 ```
 Do the same for the other project.
 
-##Structure
+##Elixir Core
+First of all, it is necessary to compile the code of the **elixir_core** project because it is a dependency of the main project, elixir_beacon.
+```
+cd elixir_core
+mvn clean compile jar:jar
+```
+This will generate the JAR file **elixir-core-beacon_api_v0.3-SNAPSHOT.jar** inside the /target folder.
+
+Then execute:
+```
+mvn install
+```
+Now this dependency will be found when compiling the main project, elixir_beacon.
+
+##Elixir Beacon, the main project
+###Project structure
 The project has the following structure:
 * /src/main/java
     * Java files (.java).
@@ -106,21 +121,7 @@ The project has the following structure:
 * /target
     * among other things, contains the .jar file with the compiled classes, libraries, etc.
 
-##Elixir Core
-First of all, it is necessary to compile the code of the **elixir_core** project because it is a dependency of the main project, elixir_beacon.
-```
-cd elixir_core
-mvn clean compile jar:jar
-```
-This will generate the JAR file **elixir-core-beacon_api_v0.3-SNAPSHOT.jar** inside the /target folder.
-
-Then execute:
-```
-mvn install
-```
-Now this dependency will be found when compiling the main project, elixir_beacon.
-
-##Configure application
+###Configuration files
 The key files are **/src/main/resources/application-{profile}.properties** and **/src/test/resources/application-{profile}.properties** (see [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
 
 By default, the application is deployed at port **9075** and the context is **/elixirbeacon/v03/**. You can change this by modifying the following lines of the application-{profile}.properties file:
