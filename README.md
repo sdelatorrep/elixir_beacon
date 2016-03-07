@@ -6,7 +6,9 @@
 
 #Configure databases
 ##Create databases
-* Create two databases with the name you want (default names used by the application are **elixir_beacon_dev** and **elixir_beacon_testing**):
+* Create two databases. Default names are:
+    * **elixir_beacon_dev**: this is the main database that will be used by the application.
+    * **elixir_beacon_testing**: this is a secondary database that will be used to run the tests.
 ```
 createdb elixir_beacon_dev -h 127.0.0.1 -p 5432 -U postgres
 createdb elixir_beacon_testing -h 127.0.0.1 -p 5432 -U postgres
