@@ -8,31 +8,42 @@
 ##Create databases
 * Create two databases with the name you want (default names used by the application are **elixir_beacon_dev** and **elixir_beacon_testing**):
 ```
-createdb database_name -h server_host -p server_port -U super_user
+createdb elixir_beacon_dev -h localhost -p 5432 -U postgres
+createdb elixir_beacon_testing -h localhost -p 5432 -U postgres
 ```
+NOTE: If you want to use a different name, user or your Postgres server is listening to a different port, please, replace the values in the prevoius command.
+
 * Create a user that will be used by the application to connect to the databases just created:
 ```
-createuser user_name
+createuser -P microaccounts_dev
 ```
+This command will propt for the password of the new user.
+
 * Log in each of the databases and grant privileges to a normal user (that is, not a super user), i. e. the user just created in the previous step:
 ```
-psql database_name -U super_user
+psql elixir_beacon_dev -U postgres
 ```
 ```sql
-GRANT ALL PRIVILEGES ON DATABASE database_name TO normal_user;
+GRANT ALL PRIVILEGES ON DATABASE elixir_beacon_dev TO microaccounts_dev;
 ```
-You can skip this step and load the schema using a super user in the next step and after that, granting privileges to a normal user (this user will be used by the application to connect to the database).
+Remember to run this line in both databases.
+
+NOTE: You can skip this step and load the schema using a super user in the next step and after that, granting privileges to a normal user (this user will be used by the application to connect to the database).
 
 * Download the schema script from [here](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql) and run it in **both** databases: 
 ```
-psql -h server_host -p server_port -d database_name -U user_name < elixir_beacon_db_schema.sql
+psql -h localhost -p 5432 -d elixir_beacon_dev -U microaccounts_dev < elixir_beacon_db_schema.sql
+psql -h localhost -p 5432 -d elixir_beacon_dev -U elixir_beacon_testing < elixir_beacon_db_schema.sql
 ```
 That script will create the schema and also load some essential data for data use conditions.
 
 If you use a super user to create the schema then you will need to grant access to the "normal" user that will be used by the application (that user we created in the second step):
+```
+psql elixir_beacon_dev -U postgres
+```
 ```sql
-GRAN ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO USER user_name;
-GRAN ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO USER user_name;
+GRAN ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO USER microaccounts_dev;
+GRAN ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO USER microaccounts_dev;
 ```
 Remember to run these lines in both databases.
 
@@ -57,7 +68,7 @@ NOTE: Remember to replace the values in the previous command with the correct on
 
 * Load the generated file into **beacon_data_table**:
 ```
-cat dataset_id.SNPs | psql -h server_host -p port -U user_name -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" database_name
+cat dataset_id.SNPs | psql -h localhost -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
 ```
 
 #Managing the code
@@ -116,14 +127,14 @@ server.context-path=/elixirbeacon
 ```
 By default, the application uses two PostgreSQL databases with the name **elixir_beacon_dev** and **elixir_beacon_testing** (the latter is used to run the tests).
 ```INI
-datasource.elixirbeacon.url=jdbc:postgresql://hostname:port/elixir_beacon_dev
-datasource.elixirbeacon.username=the_username
+datasource.elixirbeacon.url=jdbc:postgresql://127.0.0.1:5432/elixir_beacon_dev
+datasource.elixirbeacon.username=microaccounts_dev
 datasource.elixirbeacon.password=the_password
 datasource.elixirbeacon.driverClassName=org.postgresql.Driver
 ```
-1. Specify the type of the database (postgresql), the hostname, port and finally the database name.
+1. Specify the type of the database (postgresql), the hostname (default, 127.0.0.1), port (default, 5432) and finally the database name.
     * I. e. if you use MySQL: jdbc:mysql
-2. Username that will be used to connect to the database.
+2. Username that will be used to connect to the database (default, microaccounts_dev).
 3. Password of that username.
 4. Driver class name 
     * if you use MySQL: com.mysql.jdbc.Driver
