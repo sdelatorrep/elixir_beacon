@@ -70,6 +70,7 @@ NOTE: Remember to replace the values in the previous command with the correct on
 ```
 cat dataset_id.SNPs | psql -h localhost -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
 ```
+NOTE: This command should be executed only in the **elixir_beacon_dev** database. The testing database will be initialized with some data when the tests are run.
 
 #Managing the code
 ##Download the project
