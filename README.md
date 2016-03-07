@@ -1,7 +1,7 @@
 #Requirements
-* Java 8 JRE (or SDK if the code needs to be compiled)
+* Java 8 JDK
 * Apache Maven 3
-* PostgreSQL Server or any other SQL server (i. e. MySQL)
+* PostgreSQL Server 9.0+, or any other SQL server (i. e. MySQL)
 * JMeter
 
 #Configure databases
@@ -120,19 +120,19 @@ mvn install
 Now this dependency will be found when compiling the main project, elixir_beacon.
 
 ##Configure application
-The key file are **/src/main/resources/application-{profile}.properties** and **/src/test/resources/application-{profile}.properties** (see [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
+The key files are **/src/main/resources/application-{profile}.properties** and **/src/test/resources/application-{profile}.properties** (see [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
 
-By default, the application is deployed at port **9075** and the context is **/elixirbeacon/v03/**. You can change this by modifying the following lines of the properties file:
+By default, the application is deployed at port **9075** and the context is **/elixirbeacon/v03/**. You can change this by modifying the following lines of the application-{profile}.properties file:
 ```INI
 server.port=9075
 server.servlet-path=/v03
 server.context-path=/elixirbeacon
 ```
-By default, the application uses two PostgreSQL databases with the name **elixir_beacon_dev** and **elixir_beacon_testing** (the latter is used to run the tests).
+As explained at the beginning, the application uses two PostgreSQL databases named **elixir_beacon_dev** and **elixir_beacon_testing**.
 ```INI
 datasource.elixirbeacon.url=jdbc:postgresql://127.0.0.1:5432/elixir_beacon_dev
 datasource.elixirbeacon.username=microaccounts_dev
-datasource.elixirbeacon.password=the_password
+datasource.elixirbeacon.password=PUT HERE YOUR PASSWORD
 datasource.elixirbeacon.driverClassName=org.postgresql.Driver
 ```
 1. Specify the type of the database (postgresql), the hostname (default, 127.0.0.1), port (default, 5432) and finally the database name.
@@ -147,7 +147,7 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialec
 1. Hibernate dialect.
     * if you use MySQL: org.hibernate.dialect.MySQLDialect
  
-If you use a different DB than Postgres, you must add the corresponding library to the **/lib** folder inside the JAR (you don't need to recompile) or add the dependency to the pom.xml so maven can download the library (this will force you to compile).
+If you use a different DB than Postgres, you must add the corresponding library to the **/lib** folder inside the JAR (you don't need to recompile) or add the dependency to the pom.xml so maven can download the library (this will force you to compile, see next step).
 
 ##Compile and test the code
 To compile the code run the following command within the project folder:
@@ -165,7 +165,7 @@ NOTE: To execute the tests you should use a different database than the main one
 If compilation and test execution are successful, a JAR file will be generated in the folder **/target** with the name **elixir-beacon-0.3.jar**
 
 ##Deploy the JAR
-To deploy the JAR run run the following command within the /elixir_beacon/target folder:
+To deploy the JAR run run the following command within the **elixir_beacon/target** folder:
  ```
 java -jar elixir-beacon-0.3.jar --spring.profiles.active=dev
  ```
