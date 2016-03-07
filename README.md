@@ -5,8 +5,12 @@
 * JMeter
 
 #Quick start
+This guide uses the default configuration and sets the application up using some sample data. It requires a Postgres server running in the local machine and listening to the default port 5432.
+
+If you want to tune the configuration or load custom data, please, skip this section and keep reading.
+
 * Prepare databases
-   * Create databases and a user
+   * Create 2 databases and a user (use r783qjkldDsiu as password)
    ```
    createdb elixir_beacon_dev -h 127.0.0.1 -p 5432 -U postgres
    createdb elixir_beacon_testing -h 127.0.0.1 -p 5432 -U postgres
@@ -25,7 +29,7 @@
    * Load data (download [1000Genomes.SNPs]())
    ```sql
    INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
-       VALUES ('1000Genomes', '1000Genomes', 'PUBLIC', 'grch37', 123456);
+       VALUES ('1000Genomes', 'The goal of the 1000 Genomes Project was to find most genetic variants with frequencies of at least 1% in the populations studied.', 'PUBLIC', 'grch37', 123456);
    ```
    ```
    cat 1000Genomes.SNPs | psql -h 127.0.0.1 -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
