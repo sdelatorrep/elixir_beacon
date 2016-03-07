@@ -76,7 +76,7 @@ NOTE: This command should be executed only in the **elixir_beacon_dev** database
 
 #Managing the code
 ##Download the project
-Clone the projects **elixir_beacon** (current one) and **elixir_core** located at the [Elixir' repository](https://github.com/elixirhub/human-data-beacon).
+Clone the projects **elixir_beacon** (current one) and **elixir_core** located at the [Elixir's repository](https://github.com/elixirhub/human-data-beacon).
 ```
 git clone https://github.com/elixirhub/human-data-beacon.git
 ```
