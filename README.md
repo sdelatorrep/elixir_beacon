@@ -8,8 +8,8 @@
 ##Create databases
 * Create two databases with the name you want (default names used by the application are **elixir_beacon_dev** and **elixir_beacon_testing**):
 ```
-createdb elixir_beacon_dev -h localhost -p 5432 -U postgres
-createdb elixir_beacon_testing -h localhost -p 5432 -U postgres
+createdb elixir_beacon_dev -h 127.0.0.1 -p 5432 -U postgres
+createdb elixir_beacon_testing -h 127.0.0.1 -p 5432 -U postgres
 ```
 NOTE: If you want to use a different name, user or your Postgres server is listening to a different port, please, replace the values in the prevoius command.
 
@@ -32,8 +32,8 @@ NOTE: You can skip this step and load the schema using a super user in the next 
 
 * Download the schema script from [here](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql) and run it in **both** databases: 
 ```
-psql -h localhost -p 5432 -d elixir_beacon_dev -U microaccounts_dev < elixir_beacon_db_schema.sql
-psql -h localhost -p 5432 -d elixir_beacon_dev -U elixir_beacon_testing < elixir_beacon_db_schema.sql
+psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U microaccounts_dev < elixir_beacon_db_schema.sql
+psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U elixir_beacon_testing < elixir_beacon_db_schema.sql
 ```
 That script will create the schema and also load some essential data for data use conditions.
 
@@ -68,7 +68,7 @@ NOTE: Remember to replace the values in the previous command with the correct on
 
 * Load the generated file into **beacon_data_table**:
 ```
-cat dataset_id.SNPs | psql -h localhost -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
+cat dataset_id.SNPs | psql -h 127.0.0.1 -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
 ```
 NOTE: This command should be executed only in the **elixir_beacon_dev** database. The testing database will be initialized with some data when the tests are run.
 
