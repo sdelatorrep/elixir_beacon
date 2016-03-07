@@ -109,9 +109,10 @@ The project has the following structure:
 ##Elixir Core
 First of all, it is necessary to compile the code of the **elixir_core** project because it is a dependency of the main project, elixir_beacon.
 ```
+cd elixir_core
 mvn clean compile jar:jar
 ```
-This will generate the JAR file **elixir-core-beacon_api_v0.3-SNAPSHOT.jar**
+This will generate the JAR file **elixir-core-beacon_api_v0.3-SNAPSHOT.jar** inside the /target folder.
 
 Then execute:
 ```
@@ -152,6 +153,7 @@ If you use a different DB than Postgres, you must add the corresponding library 
 ##Compile and test the code
 To compile the code run the following command within the project folder:
 ```
+cd elixir_beacon
 mvn clean compile package -Dspring.profiles.active="dev"
 ```
 That will also execute the tests. To skip them add <code>-Dmaven.test.skip=true</code> to the command.
@@ -167,9 +169,10 @@ If compilation and test execution are successful, a JAR file will be generated i
 ##Deploy the JAR
 To deploy the JAR run run the following command within the **elixir_beacon/target** folder:
  ```
+cd target
 java -jar elixir-beacon-0.3.jar --spring.profiles.active=dev
  ```
-It will generate a log in the file **application.log** located in the same folder where the JAR is located.
+It will generate a log in the file **application.log** located in the same folder where the JAR is located (by default, elixir_beacon/target but you can move the JAR file wherever you want and deploy it there).
 
 This argument <code>--spring.profiles.active=dev</code> specifies the profile to be used. By default, there are 2 profiles: **dev** and **test**. Each profile will use its own set of properties files. 
 
