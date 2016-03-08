@@ -168,23 +168,6 @@ mvn install
 Now this dependency will be found when compiling the main project, elixir_beacon.
 
 ##Elixir Beacon, the main project
-###Project structure
-The project has the following structure:
-* /src/main/java
-    * Java files (.java).
-* /src/main/resources
-    * configuration files: .properies, .yml
-* /src/test/java
-    * Java classes for testing.
-* /src/test/resources
-    * configuration files for testing: .properties, .yml
-* /target/generated-sources/java
-    * auto generated Java files.
-* /target/classes
-    * compiled files (.class).
-* /target
-    * among other things, contains the .jar file with the compiled classes, libraries, etc.
-
 ###Configuration files
 The key files are **/src/main/resources/application-{profile}.properties** and **/src/test/resources/application-{profile}.properties** (see [Deploy JAR](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#deploy-the-jar) for more information about profiles).
 
@@ -453,7 +436,25 @@ Or you can ask for the same information in an specific dataset:
 }
 ```
 
-#Extend/Change functionality
+#Further information
+##Project structure
+The project has the following structure:
+* /src/main/java
+    * Java files (.java).
+* /src/main/resources
+    * configuration files: .properies, .yml
+* /src/test/java
+    * Java classes for testing.
+* /src/test/resources
+    * configuration files for testing: .properties, .yml
+* /target/generated-sources/java
+    * auto generated Java files.
+* /target/classes
+    * compiled files (.class).
+* /target
+    * among other things, contains the .jar file with the compiled classes, libraries, etc.
+
+##Extend/Change functionality
 You have two options:
 
 1. Editing the source code.
