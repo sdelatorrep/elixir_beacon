@@ -78,7 +78,7 @@ createdb elixir_beacon_testing -h 127.0.0.1 -p 5432 -U postgres
 ```
 NOTE: If you want to use a different name, user or your Postgres server is running in a different host or is listening to a different port, please, replace the values in the previous command.
 
-These are the most common options used in the commands of this section:
+* These are the most common options used in the commands of this section:
   * <code>-d</code> database name (depending on the command the database name will be specified with this option).
   * <code>-h</code> hostname or IP of the machine where the Postgres server is running.
   * <code>-p</code> port that the Postgres server is listening to.
