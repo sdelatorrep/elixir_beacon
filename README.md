@@ -101,8 +101,8 @@ If you use a super user to create the schema then you will need to grant access 
 psql elixir_beacon_dev -U postgres
 ```
 ```sql
-GRAN ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO USER microaccounts_dev;
-GRAN ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO USER microaccounts_dev;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO microaccounts_dev;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO microaccounts_dev;
 ```
 Remember to run these lines in both databases.
 
