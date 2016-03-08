@@ -77,18 +77,17 @@ createdb elixir_beacon_dev -h 127.0.0.1 -p 5432 -U postgres
 createdb elixir_beacon_testing -h 127.0.0.1 -p 5432 -U postgres
 ```
 NOTE: If you want to use a different name, user or your Postgres server is running in a different host or is listening to a different port, please, replace the values in the previous command:
-```
- * -d database name (depending on the command the database name will be specified with this flag)
- * -h hostname or IP of the machine where the Postgres server is running
- * -p port that the Postgres server is listening to
- * -U user name that will be used to connect to the database. Depending on the command it might be required to be a superuser (i. e. postgres).
-```
+* <code>-d</code> database name (depending on the command the database name will be specified with this flag)
+* <code>-h</code> hostname or IP of the machine where the Postgres server is running
+* <code>-p</code> port that the Postgres server is listening to
+* <code>-U</code> user name that will be used to connect to the database. Depending on the command it might be required to be a superuser (i. e. postgres).
+
 
 * Create a user that will be used by the application to connect to the databases just created:
 ```
 createuser -P microaccounts_dev
 ```
-This command will propt for the password of the new user.
+This command will prompt for the password of the new user.
 
 * Log in each of the databases and grant privileges to a normal user (that is, not a super user), i. e. the user just created in the previous step:
 ```
