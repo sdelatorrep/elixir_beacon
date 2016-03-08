@@ -4,9 +4,8 @@
 * PostgreSQL Server 9.0+, or any other SQL server (i. e. MySQL)
 * JMeter
 
-Quick start
-============
-This guide uses the default configuration and sets the application up using some sample data. It requires a Postgres server running in the local machine and listening to the default port 5432.
+#Quick start
+This quick start guide uses the default configuration and sets the application up using some sample data. It requires a Postgres server running in the local machine and listening to the default port 5432.
 
 If you want to tune the configuration or load custom data, please, skip this section and keep reading.
 
@@ -62,6 +61,7 @@ mvn clean compile package -Dspring.profiles.active="dev"
 cd target
 java -jar elixir-beacon-0.3.jar --spring.profiles.active=dev
 ```
+* Go to [localhost:9075/elixirbeacon/v03/beacon/info](http://localhost:9075/elixirbeacon/v03/beacon/info)
 
 #Configure databases
 ##Create databases
