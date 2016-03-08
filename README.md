@@ -22,6 +22,7 @@ GRANT ALL PRIVILEGES ON DATABASE elixir_beacon_testing TO microaccounts_dev;
 ```
 * Load the schema (download [elixir_beacon_db_schema.sql](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql))
 ```
+wget https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql
 psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U microaccounts_dev < elixir_beacon_db_schema.sql
 psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U elixir_beacon_testing < elixir_beacon_db_schema.sql
 ```
@@ -34,6 +35,7 @@ INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
   VALUES ('EGAD00000000028', 'Sample variants', 'PUBLIC', 'grch37', 34114);
 ```
 ```
+wget https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/EGAD00000000028.SNPs
 cat EGAD00000000028.SNPs | psql -h 127.0.0.1 -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
 ```
 * Download the code
