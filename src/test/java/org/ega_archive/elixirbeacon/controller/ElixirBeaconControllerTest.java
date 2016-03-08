@@ -1,7 +1,6 @@
 package org.ega_archive.elixirbeacon.controller;
 
 import org.ega_archive.elixirbeacon.Application;
-import org.ega_archive.elixirbeacon.dto.Beacon;
 import org.ega_archive.elixirbeacon.dto.BeaconAlleleResponse;
 import org.ega_archive.elixircore.constant.ParamName;
 import org.ega_archive.elixircore.test.util.TestUtils;
@@ -91,9 +90,9 @@ public class ElixirBeaconControllerTest {
         .accept(MediaType.APPLICATION_JSON))
         .andReturn();
     
-    Beacon response = JsonUtils.jsonToObject(mvcResult.getResponse().getContentAsString(), Beacon.class, objectMapper);
+    String response = mvcResult.getResponse().getContentAsString();
     
-    assertThat(response, notNullValue(Beacon.class));
+    assertThat(response, notNullValue());
   }
   
   @Test
@@ -103,9 +102,9 @@ public class ElixirBeaconControllerTest {
         .accept(MediaType.APPLICATION_JSON))
         .andReturn();
     
-    Beacon response = JsonUtils.jsonToObject(mvcResult.getResponse().getContentAsString(), Beacon.class, objectMapper);
+    String response = mvcResult.getResponse().getContentAsString();
     
-    assertThat(response, notNullValue(Beacon.class));
+    assertThat(response, notNullValue());
   }
   
   @Test
