@@ -4,39 +4,39 @@
 * PostgreSQL Server 9.0+, or any other SQL server (i. e. MySQL)
 * JMeter
 
-#Quick start
+Quick start
+============
 This guide uses the default configuration and sets the application up using some sample data. It requires a Postgres server running in the local machine and listening to the default port 5432.
 
 If you want to tune the configuration or load custom data, please, skip this section and keep reading.
 
-* Prepare databases
-   * Create 2 databases and a user (use r783qjkldDsiu as password)
-   ```
-   createdb elixir_beacon_dev -h 127.0.0.1 -p 5432 -U postgres
-   createdb elixir_beacon_testing -h 127.0.0.1 -p 5432 -U postgres
-   createuser -P microaccounts_dev
-   psql elixir_beacon_dev -U postgres
-   ```
-   ```sql
-   GRANT ALL PRIVILEGES ON DATABASE elixir_beacon_dev TO microaccounts_dev;
-   GRANT ALL PRIVILEGES ON DATABASE elixir_beacon_testing TO microaccounts_dev;
-   ```
-   * Load the schema (download [elixir_beacon_db_schema.sql](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql))
-   ```
-   psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U microaccounts_dev < elixir_beacon_db_schema.sql
-   psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U elixir_beacon_testing < elixir_beacon_db_schema.sql
-   ```
-   * Load data (download [EGAD00000000028.SNPs](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/EGAD00000000028.SNPs))
-   ```
-   psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U microaccounts_dev
-   ```
-   ```sql
-   INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
-       VALUES ('EGAD00000000028', 'Sample variants', 'PUBLIC', 'grch37', 34114);
-   ```
-   ```
-   cat EGAD00000000028.SNPs | psql -h 127.0.0.1 -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
-   ```
+* Create 2 databases and a new user (use *r783qjkldDsiu* as password)
+```
+createdb elixir_beacon_dev -h 127.0.0.1 -p 5432 -U postgres
+createdb elixir_beacon_testing -h 127.0.0.1 -p 5432 -U postgres
+createuser -P microaccounts_dev
+psql elixir_beacon_dev -U postgres
+```
+```sql
+GRANT ALL PRIVILEGES ON DATABASE elixir_beacon_dev TO microaccounts_dev;
+GRANT ALL PRIVILEGES ON DATABASE elixir_beacon_testing TO microaccounts_dev;
+```
+* Load the schema (download [elixir_beacon_db_schema.sql](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/elixir_beacon_db_schema.sql))
+```
+psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U microaccounts_dev < elixir_beacon_db_schema.sql
+psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U elixir_beacon_testing < elixir_beacon_db_schema.sql
+```
+* Load data (download [EGAD00000000028.SNPs](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/EGAD00000000028.SNPs))
+```
+psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U microaccounts_dev
+```
+```sql
+INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
+  VALUES ('EGAD00000000028', 'Sample variants', 'PUBLIC', 'grch37', 34114);
+```
+```
+cat EGAD00000000028.SNPs | psql -h 127.0.0.1 -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
+```
 * Download the code
 ```
 git clone https://github.com/elixirhub/human-data-beacon.git
@@ -62,7 +62,6 @@ mvn clean compile package -Dspring.profiles.active="dev"
 cd target
 java -jar elixir-beacon-0.3.jar --spring.profiles.active=dev
 ```
-
 
 #Configure databases
 ##Create databases
