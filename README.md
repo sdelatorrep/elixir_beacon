@@ -29,7 +29,7 @@ If you want to tune the configuration or load custom data, please, skip this sec
    * Load data (download [1000Genomes.SNPs]())
    ```sql
    INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
-       VALUES ('1000Genomes', 'The goal of the 1000 Genomes Project was to find most genetic variants with frequencies of at least 1% in the populations studied.', 'PUBLIC', 'grch37', 123456);
+       VALUES ('EGAD00000000028', 'Sample variants', 'PUBLIC', 'grch37', 34114);
    ```
    ```
    cat 1000Genomes.SNPs | psql -h 127.0.0.1 -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
