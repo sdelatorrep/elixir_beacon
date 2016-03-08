@@ -26,7 +26,7 @@ If you want to tune the configuration or load custom data, please, skip this sec
    psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U microaccounts_dev < elixir_beacon_db_schema.sql
    psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U elixir_beacon_testing < elixir_beacon_db_schema.sql
    ```
-   * Load data (download [1000Genomes.SNPs]())
+   * Load data (download [EGAD00000000028.SNPs](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/EGAD00000000028.SNPs))
    ```
    psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U microaccounts_dev
    ```
