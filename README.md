@@ -115,13 +115,14 @@ Remember to run these lines in both databases.
 ##Load the data
 * Download the script to parse VCF files [here](https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/vcf_parser.sh) and give it executable rights:
 ```
+wget https://raw.githubusercontent.com/sdelatorrep/elixir_beacon/master/src/main/resources/META-INF/vcf_parser.sh
 chmod +x vcf_parser.sh
 ```
 * Run this script executing:
 ```
 ./vcf_parser.sh dataset_id < file.vcf
 ```
-This script will generate an output file called dataset_id.SNPs.
+This script will generate an output file called dataset_id.SNPs (i. e. EGAD00000000028.SNPs).
 It will also output the number of variants extracted from the VCF. This value is the "size" in the next step.
 
 * Load the dataset information into **beacon_dataset_table**.
