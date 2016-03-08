@@ -61,7 +61,9 @@ mvn clean compile package -Dspring.profiles.active="dev"
 cd target
 java -jar elixir-beacon-0.3.jar --spring.profiles.active=dev
 ```
-* Go to [localhost:9075/elixirbeacon/v03/beacon/info](http://localhost:9075/elixirbeacon/v03/beacon/info)
+* Go to 
+  * [localhost:9075/elixirbeacon/v03/beacon/info](http://localhost:9075/elixirbeacon/v03/beacon/info)
+  * [localhost:9075/elixirbeacon/v03/beacon/query?referenceName=11&position=1951960&alternateBases=G&assemblyId=GRCh37&datasetIds=EGAD00000000028](http://localhost:9075/elixirbeacon/v03/beacon/query?referenceName=11&position=1951960&alternateBases=G&assemblyId=GRCh37&datasetIds=EGAD00000000028)
 
 #Configure databases
 ##Create databases
