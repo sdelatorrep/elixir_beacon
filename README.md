@@ -27,12 +27,15 @@ If you want to tune the configuration or load custom data, please, skip this sec
    psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U elixir_beacon_testing < elixir_beacon_db_schema.sql
    ```
    * Load data (download [1000Genomes.SNPs]())
+   ```
+   psql -h 127.0.0.1 -p 5432 -d elixir_beacon_dev -U microaccounts_dev
+   ```
    ```sql
    INSERT INTO beacon_dataset(id, description, access_type, reference_genome, size)
        VALUES ('EGAD00000000028', 'Sample variants', 'PUBLIC', 'grch37', 34114);
    ```
    ```
-   cat 1000Genomes.SNPs | psql -h 127.0.0.1 -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
+   cat EGAD00000000028.SNPs | psql -h 127.0.0.1 -p 5432 -U microaccounts_dev -c "COPY beacon_data_table(dataset_id,chromosome,position,alternate) FROM STDIN USING DELIMITERS ';' CSV" elixir_beacon_dev
    ```
 * Download the code
 ```
