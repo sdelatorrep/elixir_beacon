@@ -376,7 +376,7 @@ Returns the information about this beacon: its Id, name and description, the API
   }
 }
 ```
-The 3 examples that appear in field **sampleAlleleRequests** can be customized by modifying the following properties in **application-{profile}.yml**:
+The 3 examples that appear in field **sampleAlleleRequests** can be customized by modifying the following properties in **/src/main/resources/application-{profile}.yml**:
 ```yml
 #properties
 #sample #1
