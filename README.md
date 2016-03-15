@@ -376,7 +376,29 @@ Returns the information about this beacon: its Id, name and description, the API
   }
 }
 ```
-The 3 examples that appear in field sampleAlleleRequests can be customized by modifying **application-{profile}.yml** as explained in [Configure application](https://github.com/sdelatorrep/elixir_beacon/blob/master/README.md#configure-application).
+The 3 examples that appear in field **sampleAlleleRequests** can be customized by modifying the following properties in **application-{profile}.yml**:
+```yml
+#properties
+#sample #1
+querySamples:
+  assembly-id-1: GRCh37
+  position-1: 6689
+  reference-name-1: 17
+  alternate-bases-1: 
+  dataset-ids-1: 
+#sample #2
+  assembly-id-2: GRCh37
+  position-2: 1040026
+  reference-name-2: 1
+  alternate-bases-2: 
+  dataset-ids-2: EGAD00001000740,EGAD00001000741
+#sample #3
+  assembly-id-3: GRCh37
+  position-3: 1040026
+  reference-name-3: 1
+  alternate-bases-3: C
+  dataset-ids-3: EGAD00001000740
+```
 
 ##/beacon/query
 To actually ask the beacon for questions like "do you have any genomes with an 'A' at position 100,735 on chromosome 3?" And the answer will be yes or no.
