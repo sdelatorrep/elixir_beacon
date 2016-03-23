@@ -1,3 +1,6 @@
+#This repository is deprecated
+Go to https://github.com/elixirhub/human-data-beacon
+
 #Requirements
 * Java 8 JDK
 * Apache Maven 3
